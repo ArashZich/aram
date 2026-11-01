@@ -92,8 +92,22 @@ class Db private constructor(c: Context) : SQLiteOpenHelper(c, "inbox.db", null,
     fun open(pkg: String? = null): List<Entry> =
         if (pkg == null) query("cleared = 0", null) else query("cleared = 0 AND pkg = ?", arrayOf(pkg))
 
-    /** Everything kept, cleared or not, newest first. */
-    fun history(limit: Int = 2000): List<Entry> = query(null, null, limit)
+    /**
+     * Everything kept, cleared or not, newest first; with [q], the rows whose title or text has it or whose app is
+     * one of [apps] (the apps whose name has it). A page at a time: the list asks for more as it scrolls.
+     */
+    fun history(q: String = "", apps: Collection<String> = emptyList(), limit: Int = 200): List<Entry> {
+        if (q.isEmpty()) return query(null, null, limit)
+        val like = "%" + q.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_") + "%"
+        val where = "title LIKE ? ESCAPE '\\' OR body LIKE ? ESCAPE '\\'" +
+            if (apps.isEmpty()) "" else " OR pkg IN (${apps.joinToString(",") { "?" }})"
+        return query(where, arrayOf(like, like) + apps, limit)
+    }
+
+    /** Every app that has a row. */
+    fun apps(): List<String> = readableDatabase.rawQuery("SELECT DISTINCT pkg FROM items", null).use { c ->
+        buildList { while (c.moveToNext()) add(c.getString(0)) }
+    }
 
     fun markRead(pkg: String) = set("read", "cleared = 0 AND pkg = ?", arrayOf(pkg))
 

@@ -108,8 +108,12 @@ class MainActivity : Activity() {
     // ---- inbox
 
     private fun renderInbox() {
-        val open = Db.get(this).open()
-        val groups = Rules.groups(open)
+        Inbox.load({ Db.get(this).open().let { it to Rules.groups(it) } }) { (open, groups) ->
+            if (!isDestroyed) drawInbox(open, groups)
+        }
+    }
+
+    private fun drawInbox(open: List<Entry>, groups: List<Group>) {
         val unread = open.count { !it.read }
 
         val count = findViewById<TextView>(R.id.hero_count)

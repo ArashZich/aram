@@ -74,8 +74,8 @@ class AppActivity : Activity() {
         super.onPause()
     }
 
-    private fun render() {
-        val items = Db.get(this).open(pkg)
+    private fun render() = Inbox.load({ Db.get(this).open(pkg) }) { items ->
+        if (isDestroyed) return@load
         adapter.items = items
         findViewById<TextView>(R.id.count).text = resources.getQuantityString(R.plurals.in_inbox, items.size, items.size)
         findViewById<View>(R.id.clear_app).visibility = if (items.isEmpty()) View.GONE else View.VISIBLE

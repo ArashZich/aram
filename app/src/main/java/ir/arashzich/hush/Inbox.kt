@@ -18,7 +18,10 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.LruCache
 import java.io.File
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.Executors
 
 /**
  * The inbox as the app sees it: Hush's one summary notification in the shade, the tap actions of the
@@ -30,6 +33,7 @@ object Inbox {
     private const val DAY = 24 * 60 * 60 * 1000L
 
     private val main = Handler(Looper.getMainLooper())
+    private val io = Executors.newSingleThreadExecutor()  // database reads and the summary, in order, off the main thread
     private val actions = HashMap<String, PendingIntent>()  // notification key -> its tap action
     private val replies = HashMap<String, Notification.Action>()  // notification key -> its reply action
     private val watchers = LinkedHashSet<() -> Unit>()
@@ -66,8 +70,14 @@ object Inbox {
 
     /** After every change: the summary follows the inbox and open screens redraw. */
     fun changed(c: Context, tone: String? = null) {
-        postSummary(c.applicationContext, tone)
+        val app = c.applicationContext
+        io.execute { runCatching { postSummary(app, tone) } }
         main.post { watchers.toList().forEach { it() } }
+    }
+
+    /** Reads off the main thread, then hands the result to the main thread. */
+    fun <T> load(read: () -> T, done: (T) -> Unit) {
+        io.execute { runCatching(read).onSuccess { main.post { done(it) } } }
     }
 
     /** Opens the notification as its app meant it, or the app when that tap action is gone (after a restart). */
@@ -146,8 +156,15 @@ object Inbox {
 
     private fun picture(c: Context, id: Long) = File(c.filesDir, "pictures/$id.png")
 
+    // Decoded pictures, so scrolling a list does not read files; NONE marks a row without one.
+    private val NONE = Bitmap.createBitmap(1, 1, Bitmap.Config.ALPHA_8)
+    private val pictures = object : LruCache<Long, Bitmap>(4 * 1024 * 1024) {
+        override fun sizeOf(key: Long, value: Bitmap) = value.byteCount
+    }
+
     fun savePicture(c: Context, id: Long, d: Drawable?) {
         val f = picture(c, id)
+        pictures.remove(id)
         if (d == null) { f.delete(); return }
         runCatching {
             val size = 128
@@ -160,13 +177,16 @@ object Inbox {
     }
 
     fun loadPicture(c: Context, id: Long): Bitmap? {
+        pictures.get(id)?.let { return if (it === NONE) null else it }
         val f = picture(c, id)
-        return if (f.exists()) runCatching { BitmapFactory.decodeFile(f.path) }.getOrNull() else null
+        val b = if (f.exists()) runCatching { BitmapFactory.decodeFile(f.path) }.getOrNull() else null
+        pictures.put(id, b ?: NONE)
+        return b
     }
 
     // ---- apps
 
-    private val labels = HashMap<String, String>()
+    private val labels = ConcurrentHashMap<String, String>()  // read from the main thread and the io one
 
     fun label(c: Context, pkg: String): String = labels.getOrPut(pkg) {
         runCatching { c.packageManager.getApplicationLabel(c.packageManager.getApplicationInfo(pkg, 0)).toString() }
