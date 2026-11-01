@@ -62,7 +62,8 @@ since no ordinary app can change another app's floating. For *Important* apps an
 its own soft card over other apps instead.
 
 Good to know:
-- Sound and vibration still come from each app's own channel settings; Hush links you straight to them
+- An app keeps its own sound unless you give it one of Hush's tones; then mute the app's own sound (Hush links you
+  straight to its settings), since no app may silence another one. Hush's tones follow volume, silent mode and DND
 - A notification's tap action lives only in memory (Android can't store it). After a restart, tapping an old item
   opens the app, not the exact chat
 - Turning Hush off — or *Settings → Turn off and uninstall* — puts the phone's own floating setting back
