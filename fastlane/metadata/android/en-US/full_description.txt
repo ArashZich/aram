@@ -6,7 +6,10 @@ line in the shade. What really matters still reaches you right away.
 <li><b>Inbox</b>: every app's notifications, with the sender's photo, full text and time. Tap opens the chat or email.</li>
 <li><b>Copy code</b>: verification codes get a one-tap copy button.</li>
 <li><b>Remind me later</b>: in 1 hour, this evening or tomorrow morning.</li>
+<li><b>Reply</b> to messages right from Hush.</li>
 <li><b>History</b>: the last 7, 30 or 90 days, searchable.</li>
+<li><b>Stats</b>: a calendar of busy days and the week's noisiest apps.</li>
+<li><b>Summary at set hours</b>, if you want it: the shade changes only at your times.</li>
 <li><b>Four levels per app</b>: Important floats with a calm card, Inbox, Silent, or left in the shade.</li>
 <li><b>People and words</b> that always float; <b>quiet hours</b>; no notification floods.</li>
 <li>Calls, alarms, music and navigation are never touched.</li>

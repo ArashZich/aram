@@ -32,7 +32,10 @@ reach you right away.
 - **Copy code**: a verification code (OTP) gets its own chip — one tap copies it. Persian digits work too
 - **Remind me later**: hold a notification → in 1 hour, this evening or tomorrow morning; it comes back with a sound
 - **Sound per app**: give Telegram (or any app) one of Hush's six calm tones; Hush plays it when its notifications arrive
+- **Reply**: messages that offer a reply in the shade (Telegram, WhatsApp, SMS…) get a *Reply* chip
 - **History**: everything of the last days, searchable, also what you cleared (7, 30 or 90 days)
+- **Stats**: a month calendar shaded by how busy each day was, that day's notifications, and the week's noisiest
+  apps with a one-tap *Make silent*
 
 **Per app**, four levels:
 
@@ -47,6 +50,8 @@ reach you right away.
 - **People and words**: a name or a word always floats, even from an app you silenced
 - **Quiet hours**: nothing floats at night except calls and alarms
 - **No floods**: one app floats at most once a minute (or every 5 min, or every time)
+- **Summary at set hours** (off by default): the shade's summary changes only at your times (10:00, 14:00, 19:00),
+  silently or with one soft sound; the inbox in the app stays live
 - Quick Settings tile, English and Persian (RTL), light and dark, calm blue
 - No internet permission, no Google services, no libraries — nothing leaves the phone
 
@@ -65,7 +70,7 @@ Good to know:
 - An app keeps its own sound unless you give it one of Hush's tones; then mute the app's own sound (Hush links you
   straight to its settings), since no app may silence another one. Hush's tones follow volume, silent mode and DND
 - A notification's tap action lives only in memory (Android can't store it). After a restart, tapping an old item
-  opens the app, not the exact chat
+  opens the app, not the exact chat. The same goes for *Reply*: after a restart the chip is gone until the next message
 - Turning Hush off — or *Settings → Turn off and uninstall* — puts the phone's own floating setting back
 
 ## Install
@@ -131,7 +136,10 @@ keyPassword=...
 - **کپی کد**: کد تأیید (رمز یکبار مصرف) یک دکمه‌ی جدا دارد، حتی با عددهای فارسی
 - **بعداً یادم بنداز**: یک ساعت دیگر، امشب یا فردا صبح
 - **صدای هر برنامه**: برای تلگرام یا هر برنامه یکی از شش صدای آرام هیس را انتخاب کن
+- **جواب**: پیام‌هایی که در کشو دکمه‌ی جواب دارند (تلگرام، واتس‌اپ، پیامک…) داخل هیس هم «جواب» دارند
 - **تاریخچه**: همه‌چیز چند روز اخیر، با جست‌وجو
+- **آمار**: تقویم ماه با شلوغی هر روز، نوتیف‌های آن روز، و پرسروصداترین برنامه‌های هفته با «ساکتش کن»
+- **خلاصه در ساعت‌های مشخص** (پیش‌فرض خاموش): خلاصه‌ی کشو فقط در ساعت‌های دلخواه عوض می‌شود، بی‌صدا یا با یک صدای آرام
 - چهار سطح برای هر برنامه: **مهم** (شناور + صندوق)، **صندوق**، **ساکت** (خوانده‌شده)، **کشو** (دست نمی‌زند)
 - آدم‌ها و کلمه‌های مهم همیشه شناور می‌شوند؛ ساعت سکوت؛ جلوگیری از رگبار نوتیف
 - تماس، زنگ ساعت، موسیقی و مسیریابی دست‌نخورده می‌مانند

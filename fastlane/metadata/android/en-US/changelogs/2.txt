@@ -1,1 +1,1 @@
-Hush 2: a notification inbox. Every app's notifications move into Hush, sorted by app, and the shade keeps one quiet summary. New: history with search, copy verification codes in one tap, remind me later, four levels per app, calm blue design.
+Hush 2: a notification inbox. Every app's notifications move into Hush, sorted by app, and the shade keeps one quiet summary. New: history with search, copy verification codes in one tap, remind me later, reply, stats calendar, summary at set hours, sound per app, four levels per app, calm blue design.
