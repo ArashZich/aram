@@ -11,9 +11,6 @@
     <string name="step_overlay">نمایش روی برنامه‌های دیگر</string>
     <string name="step_secure">خاموش‌کردن شناور صفحه‌ی تنظیماتی ندارد و فقط با خط adb بالا ممکن است.</string>
     <string name="step_done">✓ %1$s</string>
-
-    <string name="on">روشن</string>
-    <string name="off">خاموش</string>
     <string name="hint_on">اعلان‌ها در هیس جمع می‌شوند؛ فقط موارد مهم شناور می‌شوند</string>
     <string name="hint_off">اندروید مثل همیشه اعلان‌ها را نشان می‌دهد</string>
     <string name="need_setup">اول راه‌اندازی را در تنظیمات کامل کنید</string>
@@ -133,11 +130,26 @@
         <item quantity="other">%1$d اعلان تازه</item>
     </plurals>
     <string name="step_post">نمایش اعلان خلاصه‌ی هیس</string>
-    <string name="inbox_title">صندوق</string>
     <string name="keep_history">نگه‌داشتن تاریخچه</string>
     <string name="days">%1$d روز</string>
 
     <string name="remove_title">حذف هیس</string>
     <string name="remove_hint">هیس فقط یک چیز را در گوشی عوض می‌کند: کلید اعلان شناور اندروید. این دکمه آن را به حالت قبل برمی‌گرداند و بعد صفحه‌ی حذف اندروید را باز می‌کند. اگر از صفحه‌ی اصلی گوشی حذف کنید، اعلان شناور خاموش می‌ماند.</string>
     <string name="remove_button">خاموش کن و حذف کن</string>
+    <string name="set_status">وضعیت و راه‌اندازی</string>
+    <string name="set_history">صندوق و تاریخچه</string>
+    <string name="st_ready">همه چیز آماده است</string>
+    <string name="st_needs">راه‌اندازی لازم است</string>
+    <string name="setup_why">هیس برای جمع کردن اعلان‌ها به این اجازه‌ها نیاز دارد.</string>
+    <string name="apps_sum">برنامه‌های تعیین‌نشده: %1$s</string>
+    <plurals name="words_count">
+        <item quantity="one">%1$d اسم یا کلمه</item>
+        <item quantity="other">%1$d اسم یا کلمه</item>
+    </plurals>
+    <string name="quiet_sum">ساعت سکوت %1$s تا %2$s</string>
+    <string name="quiet_off">ساعت سکوت خاموش</string>
+    <string name="sound_default">صدای برنامه‌هایی که تعیین نکرده‌اید</string>
+    <string name="sound_default_hint">هر برنامه می‌تواند صدای خودش را داشته باشد: برنامه را از صندوق باز کنید و روی صدا بزنید.</string>
+    <string name="keep_history_hint">اعلان‌های قدیمی‌تر پاک می‌شوند؛ تقویم آمار فقط تعدادشان را نگه می‌دارد.</string>
+    <string name="loading">در حال بارگذاری…</string>
 </resources>

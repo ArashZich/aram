@@ -126,7 +126,8 @@ class MainActivity : Activity() {
                 action.isSelected = true
                 action.setText(R.string.turn_on)
                 action.setOnClickListener {
-                    if (Gate.ready(this)) { Gate.setOn(this, store, true); refresh() } else show(SETTINGS)
+                    if (Gate.ready(this)) { Gate.setOn(this, store, true); refresh() }
+                    else startActivity(Intent(this, SettingActivity::class.java).putExtra(SettingActivity.SECTION, SettingActivity.STATUS))
                 }
             }
             open.isEmpty() -> {

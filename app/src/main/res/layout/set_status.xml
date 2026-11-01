@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout style="@style/Box" android:layout_marginTop="4dp">
+
+        <TextView
+            android:id="@+id/status_line"
+            style="@style/BoxTitle" />
+
+        <TextView
+            android:id="@+id/status_hint"
+            style="@style/Hint" />
+
+        <TextView
+            android:id="@+id/step_post"
+            style="@style/TextButton"
+            android:layout_marginTop="12dp"
+            android:text="@string/step_post"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/setup"
+        style="@style/Box">
+
+        <TextView
+            style="@style/BoxTitle"
+            android:text="@string/setup_title" />
+
+        <TextView
+            style="@style/Hint"
+            android:text="@string/setup_body" />
+
+        <TextView
+            android:id="@+id/command"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/chip"
+            android:fontFamily="monospace"
+            android:padding="10dp"
+            android:textColor="@color/ink"
+            android:textDirection="ltr"
+            android:textIsSelectable="true"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/copy"
+            style="@style/TextButton"
+            android:layout_marginTop="8dp"
+            android:text="@string/copy" />
+
+        <TextView
+            style="@style/Hint"
+            android:layout_marginTop="12dp"
+            android:text="@string/setup_or" />
+
+        <TextView
+            android:id="@+id/step_listener"
+            style="@style/TextButton"
+            android:layout_marginTop="8dp"
+            android:text="@string/step_listener" />
+
+        <TextView
+            android:id="@+id/step_overlay"
+            style="@style/TextButton"
+            android:layout_marginTop="8dp"
+            android:text="@string/step_overlay" />
+
+        <TextView
+            android:id="@+id/step_secure"
+            style="@style/Hint"
+            android:layout_marginTop="8dp"
+            android:text="@string/step_secure" />
+    </LinearLayout>
+</LinearLayout>
