@@ -152,4 +152,9 @@
     <string name="sound_default_hint">هر برنامه می‌تواند صدای خودش را داشته باشد: برنامه را از صندوق باز کنید و روی صدا بزنید.</string>
     <string name="keep_history_hint">اعلان‌های قدیمی‌تر پاک می‌شوند؛ تقویم آمار فقط تعدادشان را نگه می‌دارد.</string>
     <string name="loading">در حال بارگذاری…</string>
+    <string name="reply">جواب</string>
+    <string name="reply_hint">جواب شما</string>
+    <string name="send">بفرست</string>
+    <string name="reply_sent">فرستاده شد</string>
+    <string name="reply_failed">فرستاده نشد. برای جواب، خود برنامه را باز کنید.</string>
 </resources>

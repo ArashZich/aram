@@ -135,7 +135,7 @@ class Listener : NotificationListenerService() {
         }
         val heading = x.getCharSequence(Notification.EXTRA_CONVERSATION_TITLE)?.toString() ?: title
         if (heading.isBlank() && body.isBlank()) return null
-        Inbox.keep(sbn.key, n.contentIntent)
+        Inbox.keep(sbn.key, n.contentIntent, Inbox.replyAction(n))
         val id = db.save(sbn.packageName, sbn.key, heading.trim(), body.trim(), sbn.postTime, level == Level.SILENT)
         Inbox.savePicture(this, id, runCatching { n.getLargeIcon()?.loadDrawable(this) }.getOrNull())
         return db.get(id)

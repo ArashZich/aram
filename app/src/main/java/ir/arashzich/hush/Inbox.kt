@@ -6,6 +6,7 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.app.RemoteInput
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -30,10 +31,33 @@ object Inbox {
 
     private val main = Handler(Looper.getMainLooper())
     private val actions = HashMap<String, PendingIntent>()  // notification key -> its tap action
+    private val replies = HashMap<String, Notification.Action>()  // notification key -> its reply action
     private val watchers = LinkedHashSet<() -> Unit>()
 
-    fun keep(key: String, action: PendingIntent?) {
+    fun keep(key: String, action: PendingIntent?, reply: Notification.Action?) {
         if (action != null) actions[key] = action
+        if (reply != null) replies[key] = reply else replies -= key
+    }
+
+    /** The action that takes a typed answer, as a messenger offers it in its notification. */
+    fun replyAction(n: Notification): Notification.Action? {
+        val typed = n.actions.orEmpty().filter { a -> a.remoteInputs.orEmpty().any { it.allowFreeFormInput } }
+        return typed.firstOrNull { Build.VERSION.SDK_INT >= 28 && it.semanticAction == Notification.Action.SEMANTIC_ACTION_REPLY }
+            ?: typed.firstOrNull()
+    }
+
+    /** Only while Hush keeps running: after a restart the app's reply action is gone. */
+    fun canReply(key: String) = key in replies
+
+    /** Answers through the app's own reply action, as the shade's reply field does. */
+    fun reply(c: Context, key: String, text: String): Boolean {
+        val action = replies[key] ?: return false
+        val inputs = action.remoteInputs.orEmpty().filter { it.allowFreeFormInput }.toTypedArray()
+        val results = Bundle().apply { inputs.forEach { putCharSequence(it.resultKey, text) } }
+        val intent = Intent()
+        RemoteInput.addResultsToIntent(inputs, intent, results)
+        if (Build.VERSION.SDK_INT >= 28) RemoteInput.setResultsSource(intent, RemoteInput.SOURCE_FREE_FORM_INPUT)
+        return runCatching { action.actionIntent.send(c, 0, intent) }.isSuccess
     }
 
     fun watch(f: () -> Unit) { watchers += f }

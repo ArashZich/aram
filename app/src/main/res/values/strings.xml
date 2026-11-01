@@ -152,4 +152,9 @@
     <string name="sound_default_hint">Each app can have its own sound: open the app from the inbox and tap its sound.</string>
     <string name="keep_history_hint">Older notifications are deleted; the Stats calendar keeps only the counts.</string>
     <string name="loading">Loading…</string>
+    <string name="reply">Reply</string>
+    <string name="reply_hint">Your answer</string>
+    <string name="send">Send</string>
+    <string name="reply_sent">Sent</string>
+    <string name="reply_failed">Could not send. Open the app to answer.</string>
 </resources>

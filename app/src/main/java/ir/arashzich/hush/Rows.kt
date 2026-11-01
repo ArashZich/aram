@@ -1,17 +1,22 @@
 package ir.arashzich.hush
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
+import android.text.InputType
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.BaseAdapter
+import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
@@ -83,6 +88,13 @@ class EntryAdapter(
                 setOnClickListener { copy(e.title, code) }
             }
         }
+        val canReply = !e.cleared && Inbox.canReply(e.key)
+        v.findViewById<TextView>(R.id.reply).apply {
+            visibility = if (canReply) View.VISIBLE else View.GONE
+            setOnClickListener { reply(e) }
+        }
+        v.findViewById<View>(R.id.chips).visibility =
+            if (canReply || v.findViewById<View>(R.id.code).visibility == View.VISIBLE) View.VISIBLE else View.GONE
         v.findViewById<View>(R.id.dot).visibility = if (e.read) View.GONE else View.VISIBLE
 
         val avatar = v.findViewById<ImageView>(R.id.avatar)
@@ -135,6 +147,35 @@ class EntryAdapter(
             true
         }
     }.show()
+
+    // A small box with the keyboard up; the answer goes through the app's own reply action.
+    private fun reply(e: Entry) {
+        val input = EditText(c).apply {
+            setHint(R.string.reply_hint)
+            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE or InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
+            maxLines = 5
+        }
+        val box = FrameLayout(c).apply {
+            val pad = (20 * c.resources.displayMetrics.density).toInt()
+            setPadding(pad, pad / 2, pad, 0)
+            addView(input)
+        }
+        AlertDialog.Builder(c)
+            .setTitle(e.title.ifBlank { Inbox.label(c, e.pkg) })
+            .setView(box)
+            .setPositiveButton(R.string.send) { _, _ ->
+                val text = input.text.toString().trim()
+                if (text.isEmpty()) return@setPositiveButton
+                val sent = Inbox.reply(c, e.key, text)
+                Toast.makeText(c, if (sent) R.string.reply_sent else R.string.reply_failed, Toast.LENGTH_SHORT).show()
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .create().apply {
+                window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+                show()
+            }
+        input.requestFocus()
+    }
 
     private fun copy(label: String, text: String) {
         c.getSystemService(ClipboardManager::class.java).setPrimaryClip(ClipData.newPlainText(label, text))
