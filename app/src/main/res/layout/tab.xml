@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:background="?android:attr/selectableItemBackgroundBorderless"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:background="@drawable/nav_pill"
+        android:duplicateParentState="true">
+
+        <ImageView
+            android:id="@+id/tab_icon"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center"
+            android:contentDescription="@null"
+            android:duplicateParentState="true"
+            android:tint="@color/nav_ink" />
+
+        <TextView
+            android:id="@+id/tab_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:layout_gravity="end|top"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/badge"
+            android:gravity="center"
+            android:minWidth="16dp"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:textColor="@color/on_accent"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tab_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:duplicateParentState="true"
+        android:textColor="@color/nav_ink"
+        android:textSize="12sp" />
+</LinearLayout>

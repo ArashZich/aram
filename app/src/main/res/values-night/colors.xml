@@ -1,0 +1,16 @@
+<resources>
+    <color name="bg">#FF0F141B</color>
+    <color name="surface">#FF18202A</color>
+    <color name="surface2">#FF212B37</color>
+    <color name="ink">#FFE4EAF1</color>
+    <color name="ink_soft">#FF94A1AF</color>
+    <color name="line">#FF2A3542</color>
+    <color name="accent">#FF8DB8E6</color>
+    <color name="accent_soft">#FF1F3247</color>
+    <color name="on_accent">#FF0E1C2B</color>
+    <color name="av1">#FF4D79A8</color>
+    <color name="av2">#FF4E877F</color>
+    <color name="av3">#FF67779C</color>
+    <color name="av4">#FF5A8466</color>
+    <color name="av5">#FF6F7E8F</color>
+</resources>

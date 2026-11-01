@@ -1,0 +1,119 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Hush</string>
+    <string name="via_hush">Hush · %1$s</string>
+
+    <string name="setup_title">One-time setup</string>
+    <string name="setup_body">Connect the phone with USB debugging on and run this once. It lets Hush switch Android\'s floating notifications off, read incoming notifications and show its own calm card for the ones you marked.</string>
+    <string name="copy">Copy</string>
+    <string name="copied">Copied</string>
+    <string name="setup_or">The last two can also be allowed here:</string>
+    <string name="step_listener">Notification access</string>
+    <string name="step_overlay">Display over other apps</string>
+    <string name="step_secure">Switching floating off has no screen of its own: it needs the adb line above.</string>
+    <string name="step_done">✓ %1$s</string>
+
+    <string name="on">On</string>
+    <string name="off">Off</string>
+    <string name="hint_on">Notifications gather in Hush; only what you marked floats</string>
+    <string name="hint_off">Android shows notifications as usual</string>
+    <string name="need_setup">Finish the setup in Settings first</string>
+
+    <string name="words_title">People and words</string>
+    <string name="words_hint">A notification whose title or text contains one of these always floats, in a silenced app too. For example a contact\'s name in Telegram.</string>
+    <string name="words_empty">Nothing yet.</string>
+    <string name="add">Add</string>
+    <string name="word_hint">Name or word</string>
+    <string name="any_app">Any app</string>
+    <string name="remove">Remove</string>
+
+    <string name="apps_title">Apps</string>
+    <string name="apps_hint">Important floats and goes to the inbox. Inbox gathers quietly. Silent goes to the inbox already read. Shade is left to Android. Tap an app to change it.</string>
+    <plurals name="today">
+        <item quantity="one">%1$d today</item>
+        <item quantity="other">%1$d today</item>
+    </plurals>
+    <string name="all_apps">All apps (%1$d)</string>
+    <string name="fewer_apps">Fewer apps</string>
+    <string name="android_settings">Android settings</string>
+    <string name="apps_quiet_today">No app has sent anything today. Search, or open all apps.</string>
+    <string name="search">Search apps</string>
+    <string name="default_level">Apps you have not set</string>
+    <string name="lv_important">Important</string>
+    <string name="lv_normal">Inbox</string>
+    <string name="lv_silent">Silent</string>
+
+    <string name="calm_title">Calm</string>
+    <string name="quiet">Quiet hours</string>
+    <string name="quiet_hint">Nothing floats in this time, except calls and alarms.</string>
+    <string name="until">to</string>
+    <string name="gap">Gap between two cards of one app</string>
+    <string name="gap_0">None</string>
+    <string name="gap_60">1 min</string>
+    <string name="gap_300">5 min</string>
+    <string name="stay">The card stays</string>
+    <string name="seconds">%1$d s</string>
+    <string name="test">Show a sample card</string>
+    <string name="test_title">A sample</string>
+    <string name="test_body">Swipe up to dismiss, or tap to open.</string>
+
+    <string name="lv_shade">Shade</string>
+    <string name="lvh_important">Floats with Hush\'s card and is kept in the inbox.</string>
+    <string name="lvh_normal">Goes quietly into the inbox and the summary.</string>
+    <string name="lvh_silent">Goes into the inbox already read; it is not counted in the summary.</string>
+    <string name="lvh_shade">Hush leaves it in the shade, as Android shows it.</string>
+
+    <string name="tab_inbox">Inbox</string>
+    <string name="tab_history">History</string>
+    <string name="tab_settings">Settings</string>
+    <plurals name="new_label" tools:ignore="ImpliedQuantity">
+        <item quantity="one">new notification</item>
+        <item quantity="other">new notifications</item>
+    </plurals>
+    <plurals name="from_apps">
+        <item quantity="one">from %1$d app</item>
+        <item quantity="other">from %1$d apps</item>
+    </plurals>
+    <plurals name="in_inbox">
+        <item quantity="one">%1$d in the inbox</item>
+        <item quantity="other">%1$d in the inbox</item>
+    </plurals>
+    <string name="all_read">Everything is read</string>
+    <string name="all_quiet">All quiet</string>
+    <string name="all_quiet_hint">New notifications gather here instead of the shade.</string>
+    <string name="read_all">Mark all read</string>
+    <string name="clear_all">Clear all</string>
+    <string name="clear_all_ask">Clear every notification from the inbox? They stay in History.</string>
+    <string name="hush_off">Hush is off</string>
+    <string name="turn_on">Turn on</string>
+    <string name="nothing_here">Nothing here</string>
+    <string name="back">Back</string>
+    <string name="more">More</string>
+    <string name="clear">Clear</string>
+    <string name="copy_code">Copy code %1$s</string>
+    <string name="remind_later">Remind me later</string>
+    <string name="later_hour">In 1 hour</string>
+    <string name="later_evening">This evening, 19:00</string>
+    <string name="later_morning">Tomorrow morning, 9:00</string>
+    <string name="remind_set">I\'ll remind you %1$s</string>
+    <string name="channel_remind">Reminders</string>
+    <string name="copy_text">Copy text</string>
+    <string name="sound_settings">Sound and vibration (Android)</string>
+    <string name="just_now">now</string>
+    <string name="cleared">cleared</string>
+    <string name="history_search">Search notifications</string>
+    <string name="history_empty">No notifications kept yet.</string>
+    <string name="no_match">Nothing matches.</string>
+    <string name="channel">Inbox summary</string>
+    <plurals name="summary_title">
+        <item quantity="one">%1$d new notification</item>
+        <item quantity="other">%1$d new notifications</item>
+    </plurals>
+    <string name="step_post">Show Hush\'s summary notification</string>
+    <string name="inbox_title">Inbox</string>
+    <string name="keep_history">Keep history for</string>
+    <string name="days">%1$d days</string>
+
+    <string name="remove_title">Remove Hush</string>
+    <string name="remove_hint">Hush changes one thing on the phone: Android\'s floating notifications switch. This button switches it back as it was, then opens Android\'s uninstall screen. Uninstalling from the launcher would leave floating off.</string>
+    <string name="remove_button">Turn off and uninstall</string>
+</resources>

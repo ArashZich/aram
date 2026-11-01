@@ -1,0 +1,22 @@
+<resources>
+    <!-- One calm blue on near-white; nothing loud. -->
+    <color name="bg">#FFF4F7FA</color>
+    <color name="surface">#FFFFFFFF</color>
+    <color name="surface2">#FFE9EEF4</color>
+    <color name="ink">#FF1C2633</color>
+    <color name="ink_soft">#FF66727F</color>
+    <color name="line">#FFDDE4EC</color>
+    <color name="accent">#FF3F78B5</color>
+    <color name="accent_soft">#FFE1ECF7</color>
+    <color name="on_accent">#FFFFFFFF</color>
+    <color name="icon_bg">#FF4A84C0</color>
+    <color name="icon_ink">#FFFFFFFF</color>
+    <color name="icon_mid">#FFD3E2F2</color>
+    <color name="icon_back">#FFA3C1E2</color>
+    <!-- letter avatars: soft, close in tone -->
+    <color name="av1">#FF5B8FC7</color>
+    <color name="av2">#FF5FA39A</color>
+    <color name="av3">#FF7E8FB8</color>
+    <color name="av4">#FF6D9E7A</color>
+    <color name="av5">#FF8A9AAB</color>
+</resources>

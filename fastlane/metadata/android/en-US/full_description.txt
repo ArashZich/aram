@@ -1,0 +1,16 @@
+Android shows notifications one by one: they float over what you are doing and pile up in the shade. Hush takes
+them out of the shade as they arrive, keeps them in its own inbox, sorted by app, and leaves one silent summary
+line in the shade. What really matters still reaches you right away.
+
+<ul>
+<li><b>Inbox</b>: every app's notifications, with the sender's photo, full text and time. Tap opens the chat or email.</li>
+<li><b>Copy code</b>: verification codes get a one-tap copy button.</li>
+<li><b>Remind me later</b>: in 1 hour, this evening or tomorrow morning.</li>
+<li><b>History</b>: the last 7, 30 or 90 days, searchable.</li>
+<li><b>Four levels per app</b>: Important floats with a calm card, Inbox, Silent, or left in the shade.</li>
+<li><b>People and words</b> that always float; <b>quiet hours</b>; no notification floods.</li>
+<li>Calls, alarms, music and navigation are never touched.</li>
+<li>English and Persian, light and dark. No internet permission, nothing leaves the phone.</li>
+</ul>
+
+Needs a one-time adb command (shown in the app). "Turn off and uninstall" puts the phone back exactly as it was.

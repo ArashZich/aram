@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="24dp">
+
+        <TextView
+            style="@style/PageTitle"
+            android:text="@string/tab_settings" />
+
+        <!-- one-time setup -->
+        <LinearLayout
+            android:id="@+id/setup"
+            style="@style/Box"
+            android:visibility="gone">
+
+            <TextView
+                style="@style/BoxTitle"
+                android:text="@string/setup_title" />
+
+            <TextView
+                style="@style/Hint"
+                android:text="@string/setup_body" />
+
+            <TextView
+                android:id="@+id/command"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/chip"
+                android:fontFamily="monospace"
+                android:padding="10dp"
+                android:textColor="@color/ink"
+                android:textDirection="ltr"
+                android:textIsSelectable="true"
+                android:textSize="11sp" />
+
+            <TextView
+                android:id="@+id/copy"
+                style="@style/TextButton"
+                android:layout_marginTop="8dp"
+                android:text="@string/copy" />
+
+            <TextView
+                style="@style/Hint"
+                android:layout_marginTop="12dp"
+                android:text="@string/setup_or" />
+
+            <TextView
+                android:id="@+id/step_listener"
+                style="@style/TextButton"
+                android:layout_marginTop="8dp"
+                android:text="@string/step_listener" />
+
+            <TextView
+                android:id="@+id/step_overlay"
+                style="@style/TextButton"
+                android:layout_marginTop="8dp"
+                android:text="@string/step_overlay" />
+
+            <TextView
+                android:id="@+id/step_secure"
+                style="@style/Hint"
+                android:layout_marginTop="8dp"
+                android:text="@string/step_secure" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/step_post"
+            style="@style/TextButton"
+            android:layout_marginTop="12dp"
+            android:text="@string/step_post"
+            android:visibility="gone" />
+
+        <!-- on / off -->
+        <LinearLayout
+            android:id="@+id/toggle"
+            android:layout_width="match_parent"
+            android:layout_height="132dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/power_btn"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:contentDescription="@null"
+                android:duplicateParentState="true"
+                android:src="@drawable/ic_tile"
+                android:tint="@color/chip_text" />
+
+            <TextView
+                android:id="@+id/state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:duplicateParentState="true"
+                android:textColor="@color/chip_text"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/state_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:duplicateParentState="true"
+                android:gravity="center"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="@color/chip_text"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <!-- inbox -->
+        <LinearLayout style="@style/Box">
+
+            <TextView
+                style="@style/BoxTitle"
+                android:text="@string/inbox_title" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/keep_history"
+                android:textColor="@color/ink"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:id="@+id/keeps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal" />
+        </LinearLayout>
+
+        <!-- people and words -->
+        <LinearLayout style="@style/Box">
+
+            <TextView
+                style="@style/BoxTitle"
+                android:text="@string/words_title" />
+
+            <TextView
+                style="@style/Hint"
+                android:text="@string/words_hint" />
+
+            <LinearLayout
+                android:id="@+id/words"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical" />
+
+            <TextView
+                android:id="@+id/add_word"
+                style="@style/TextButton"
+                android:layout_marginTop="8dp"
+                android:text="@string/add" />
+        </LinearLayout>
+
+        <!-- calm -->
+        <LinearLayout style="@style/Box">
+
+            <TextView
+                style="@style/BoxTitle"
+                android:text="@string/calm_title" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/quiet"
+                    android:textColor="@color/ink"
+                    android:textSize="15sp" />
+
+                <Switch
+                    android:id="@+id/quiet_on"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/Hint"
+                android:text="@string/quiet_hint" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/quiet_from"
+                    style="@style/TextButton" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/until"
+                    android:textColor="@color/ink_soft" />
+
+                <TextView
+                    android:id="@+id/quiet_to"
+                    style="@style/TextButton" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="@string/gap"
+                android:textColor="@color/ink"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:id="@+id/gaps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="@string/stay"
+                android:textColor="@color/ink"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:id="@+id/stays"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal" />
+
+            <TextView
+                android:id="@+id/test"
+                style="@style/TextButton"
+                android:layout_marginTop="18dp"
+                android:text="@string/test" />
+        </LinearLayout>
+        <!-- apps -->
+        <LinearLayout style="@style/Box">
+
+            <TextView
+                style="@style/BoxTitle"
+                android:text="@string/apps_title" />
+
+            <TextView
+                style="@style/Hint"
+                android:text="@string/apps_hint" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/default_level"
+                android:textColor="@color/ink"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:id="@+id/defaults"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal" />
+
+            <EditText
+                android:id="@+id/search"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/field"
+                android:hint="@string/search"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:textColor="@color/ink"
+                android:textColorHint="@color/ink_soft"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:id="@+id/apps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical" />
+
+            <TextView
+                android:id="@+id/all_apps"
+                style="@style/TextButton"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+        <!-- leaving -->
+        <LinearLayout style="@style/Box">
+
+            <TextView
+                style="@style/BoxTitle"
+                android:text="@string/remove_title" />
+
+            <TextView
+                style="@style/Hint"
+                android:text="@string/remove_hint" />
+
+            <TextView
+                android:id="@+id/uninstall"
+                style="@style/TextButton"
+                android:layout_marginTop="10dp"
+                android:text="@string/remove_button" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
