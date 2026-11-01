@@ -7,6 +7,7 @@ import android.app.TimePickerDialog
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
@@ -89,6 +90,9 @@ class SettingsPage(private val a: Activity, private val root: View) {
         root.findViewById<View>(R.id.uninstall).setOnClickListener { uninstall() }
         choices(root.findViewById(R.id.stays), listOf(4, 8, 12), { a.getString(R.string.seconds, it) },
             { store.showSeconds }) { store.showSeconds = it }
+
+        root.findViewById<TextView>(R.id.version).text = a.getString(R.string.version,
+            runCatching { a.packageManager.getPackageInfo(a.packageName, 0).versionName }.getOrNull().orEmpty())
 
         root.findViewById<View>(R.id.test).setOnClickListener {
             if (!Gate.canDraw(a)) {
@@ -204,13 +208,35 @@ class SettingsPage(private val a: Activity, private val root: View) {
 
     // Every real app (with a launcher icon): important first, then the busiest today, then by name.
     // Rows are built once; by default only apps the user set or that posted today are shown, the rest on search.
+    // The names and icons of every app are slow to read: once, off the main thread; later visits only reorder.
+    private var rows: List<AppRow>? = null
+    private var loading = false
+
+    private class AppRow(val tag: AppTag, val view: View, val refresh: () -> Unit)
+
     private fun renderApps() {
         val list = root.findViewById<LinearLayout>(R.id.apps)
+        val built = rows
+        if (built == null) {
+            if (loading) return
+            loading = true
+            Thread {
+                val apps = launcherApps().filter { it != a.packageName }
+                    .map { Triple(it, label(it), runCatching { a.packageManager.getApplicationIcon(it) }.getOrNull()) }
+                a.runOnUiThread {
+                    loading = false
+                    if (a.isDestroyed) return@runOnUiThread
+                    rows = apps.map { (pkg, name, icon) -> appRow(list, pkg, name, icon) }
+                    renderApps()
+                }
+            }.start()
+            return
+        }
         list.removeAllViews()
-        val apps = launcherApps().filter { it != a.packageName }.map { it to label(it) }
-            .sortedWith(compareBy<Pair<String, String>> { store.level(it.first) != Level.IMPORTANT }
-                .thenByDescending { store.today(it.first) }.thenBy { it.second.lowercase() })
-        apps.forEach { (pkg, name) -> list.addView(appRow(list, pkg).apply { tag = AppTag(pkg, name.lowercase()) }) }
+        built.forEach { it.refresh() }
+        built.sortedWith(compareBy<AppRow> { store.level(it.tag.pkg) != Level.IMPORTANT }
+            .thenByDescending { store.today(it.tag.pkg) }.thenBy { it.tag.name })
+            .forEach { list.addView(it.view) }
         list.addView(hint(a.getString(R.string.apps_quiet_today)).apply { tag = null })
         root.findViewById<TextView>(R.id.all_apps).setOnClickListener { allApps = !allApps; filterApps() }
         filterApps()
@@ -245,14 +271,17 @@ class SettingsPage(private val a: Activity, private val root: View) {
 
     private data class AppTag(val pkg: String, val name: String)
 
-    private fun appRow(parent: LinearLayout, pkg: String): View {
+    private fun appRow(parent: LinearLayout, pkg: String, name: String, icon: Drawable?): AppRow {
         val v = a.layoutInflater.inflate(R.layout.app_row, parent, false)
-        v.findViewById<ImageView>(R.id.icon).setImageDrawable(runCatching { a.packageManager.getApplicationIcon(pkg) }.getOrNull())
-        v.findViewById<TextView>(R.id.name).text = label(pkg)
-        val n = store.today(pkg)
-        v.findViewById<TextView>(R.id.count).text = if (n > 0) a.resources.getQuantityString(R.plurals.today, n, n) else ""
+        val tag = AppTag(pkg, name.lowercase())
+        v.tag = tag
+        v.findViewById<ImageView>(R.id.icon).setImageDrawable(icon)
+        v.findViewById<TextView>(R.id.name).text = name
+        val count = v.findViewById<TextView>(R.id.count)
         val pill = v.findViewById<TextView>(R.id.level)
         fun show() {
+            val n = store.today(pkg)
+            count.text = if (n > 0) a.resources.getQuantityString(R.plurals.today, n, n) else ""
             val l = store.level(pkg)
             pill.setText(levelNames.getValue(l))
             pill.isSelected = l == Level.IMPORTANT
@@ -274,7 +303,7 @@ class SettingsPage(private val a: Activity, private val root: View) {
                 }
             }.show()
         }
-        return v
+        return AppRow(tag, v, ::show)
     }
 
     private fun launcherApps(): List<String> =

@@ -78,7 +78,7 @@ class MainActivity : Activity() {
     override fun onResume() {
         super.onResume()
         Inbox.watch(refresh)
-        settings.resume()
+        if (tab == 2) settings.resume()
         refresh()
         Inbox.postSummary(this)
     }

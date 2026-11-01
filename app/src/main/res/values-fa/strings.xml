@@ -109,6 +109,7 @@
     <string name="mute_app">بی‌صدا کردن خود برنامه</string>
     <string name="sound_hint_on">هیس برای %1$s این صدا را پخش می‌کند. صدای خود %1$s را خاموش کن (دکمه‌ی بالا) تا فقط یک صدا بشنوی.</string>
     <string name="sound_hint_off">یک صدا انتخاب کن تا هیس موقع رسیدن نوتیف‌های این برنامه پخشش کند.</string>
+    <string name="version">هیس %1$s</string>
     <string name="copy_text">کپی متن</string>
     <string name="sound_settings">صدا و لرزش (اندروید)</string>
     <string name="just_now">الان</string>

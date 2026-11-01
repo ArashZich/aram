@@ -341,5 +341,12 @@
                 android:text="@string/remove_button" />
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/version"
+            style="@style/Hint"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="16dp" />
+
     </LinearLayout>
 </ScrollView>
