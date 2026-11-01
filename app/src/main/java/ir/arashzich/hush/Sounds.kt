@@ -23,6 +23,16 @@ object Sounds {
         "bell" to (R.string.tone_bell to R.raw.tone_bell),
         "breeze" to (R.string.tone_breeze to R.raw.tone_breeze),
         "pop" to (R.string.tone_pop to R.raw.tone_pop),
+        "harp" to (R.string.tone_harp to R.raw.tone_harp),
+        "marimba" to (R.string.tone_marimba to R.raw.tone_marimba),
+        "kalimba" to (R.string.tone_kalimba to R.raw.tone_kalimba),
+        "windchime" to (R.string.tone_windchime to R.raw.tone_windchime),
+        "dingdong" to (R.string.tone_dingdong to R.raw.tone_dingdong),
+        "lullaby" to (R.string.tone_lullaby to R.raw.tone_lullaby),
+        "rise" to (R.string.tone_rise to R.raw.tone_rise),
+        "bubble" to (R.string.tone_bubble to R.raw.tone_bubble),
+        "bowl" to (R.string.tone_bowl to R.raw.tone_bowl),
+        "tick" to (R.string.tone_tick to R.raw.tone_tick),
     )
 
     private var playing: Ringtone? = null

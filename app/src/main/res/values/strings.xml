@@ -102,6 +102,16 @@
     <string name="tone_bell">Bell</string>
     <string name="tone_breeze">Breeze</string>
     <string name="tone_pop">Pop</string>
+    <string name="tone_harp">Harp</string>
+    <string name="tone_marimba">Marimba</string>
+    <string name="tone_kalimba">Kalimba</string>
+    <string name="tone_windchime">Wind chime</string>
+    <string name="tone_dingdong">Ding-dong</string>
+    <string name="tone_lullaby">Lullaby</string>
+    <string name="tone_rise">Rise</string>
+    <string name="tone_bubble">Bubble</string>
+    <string name="tone_bowl">Bowl</string>
+    <string name="tone_tick">Tick</string>
     <string name="channel_tone">Sound: %1$s</string>
     <string name="mute_app">Mute app\'s sound</string>
     <string name="sound_hint_on">Hush plays this sound for %1$s. Turn off %1$s\'s own sound (button above) so you hear only one.</string>

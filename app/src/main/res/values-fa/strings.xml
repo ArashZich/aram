@@ -102,6 +102,16 @@
     <string name="tone_bell">زنگوله</string>
     <string name="tone_breeze">نسیم</string>
     <string name="tone_pop">پاپ</string>
+    <string name="tone_harp">چنگ</string>
+    <string name="tone_marimba">ماریمبا</string>
+    <string name="tone_kalimba">کالیمبا</string>
+    <string name="tone_windchime">زنگوله‌ی باد</string>
+    <string name="tone_dingdong">دینگ‌دانگ</string>
+    <string name="tone_lullaby">لالایی</string>
+    <string name="tone_rise">اوج</string>
+    <string name="tone_bubble">حباب</string>
+    <string name="tone_bowl">کاسه</string>
+    <string name="tone_tick">تیک</string>
     <string name="channel_tone">صدا: %1$s</string>
     <string name="mute_app">بی‌صدا کردن خود برنامه</string>
     <string name="sound_hint_on">هیس برای %1$s این صدا را پخش می‌کند. صدای خود %1$s را خاموش کن (دکمه‌ی بالا) تا فقط یک صدا بشنوی.</string>
