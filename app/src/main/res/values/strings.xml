@@ -166,8 +166,16 @@
     <string name="send">Send</string>
     <string name="reply_sent">Sent</string>
     <string name="reply_failed">Could not send. Open the app to answer.</string>
-    <string name="digest">Summary at set hours</string>
-    <string name="digest_hint">Off: the summary in the shade changes as notifications arrive. On: it changes only at these times. The inbox here stays live, and Important apps, people and words, and calls still float at once.</string>
+    <string name="digest">Scheduled summary</string>
+    <string name="digest_hint">The shade\'s summary changes only at the times below. The inbox here stays live, and Important apps, people and words, and calls still float at once.</string>
     <string name="digest_silent">Silently</string>
     <string name="digest_soft">With a soft sound</string>
+    <string name="digest_at">Set hours</string>
+    <string name="digest_every">%1$d min</string>
+    <string name="digest_hourly">1 hour</string>
+    <string name="digest_sum_at">summary at set hours</string>
+    <string name="digest_sum_every">summary every %1$d min</string>
+    <string name="digest_late">Android may run it a few minutes late to save battery.</string>
+    <string name="digest_sound">Sound</string>
+    <string name="digest_how">How often</string>
 </resources>

@@ -10,7 +10,7 @@ import java.time.LocalDateTime
 import java.time.ZoneId
 
 /**
- * Summary at set hours: the shade's summary changes only at the chosen times, silently or with one soft sound.
+ * Scheduled summary: the shade's summary changes only at the chosen times or every N minutes, silently or with one soft sound.
  * One inexact alarm for the next time; it is set again after each time and after a restart.
  */
 class Digest : BroadcastReceiver() {
@@ -44,7 +44,7 @@ class Digest : BroadcastReceiver() {
             val fire = PendingIntent.getBroadcast(c, 0, Intent(c, Digest::class.java).setAction(FIRE),
                 PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
             val am = c.getSystemService(AlarmManager::class.java)
-            val next = if (store.digestOn) Rules.nextDigest(LocalDateTime.now(), store.digestTimes) else null
+            val next = if (store.digestOn) Rules.nextDigest(LocalDateTime.now(), store.digestTimes, store.digestEvery) else null
             if (next == null) am.cancel(fire)
             else am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, next.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli(), fire)
         }

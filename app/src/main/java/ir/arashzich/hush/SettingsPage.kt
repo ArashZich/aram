@@ -50,8 +50,13 @@ class SettingsPage(private val a: Activity, private val root: View) {
         val words = store.words.size
         row(list, SettingActivity.WORDS,
             if (words == 0) a.getString(R.string.words_empty) else a.resources.getQuantityString(R.plurals.words_count, words, words))
-        row(list, SettingActivity.CALM,
-            if (store.quietOn) a.getString(R.string.quiet_sum, time(store.quietFrom), time(store.quietTo)) else a.getString(R.string.quiet_off))
+        val quiet = if (store.quietOn) a.getString(R.string.quiet_sum, time(store.quietFrom), time(store.quietTo)) else a.getString(R.string.quiet_off)
+        val digest = when {
+            !store.digestOn -> null
+            store.digestEvery == 0 -> a.getString(R.string.digest_sum_at)
+            else -> a.getString(R.string.digest_sum_every, store.digestEvery)
+        }
+        row(list, SettingActivity.CALM, listOfNotNull(quiet, digest).joinToString(" · "))
         row(list, SettingActivity.SOUND, Sounds.name(a, store.defaultSound))
         row(list, SettingActivity.HISTORY, a.getString(R.string.days, store.historyDays))
         row(list, SettingActivity.REMOVE, null)

@@ -154,6 +154,15 @@ class RulesTest {
         assertNull(Rules.nextDigest(at(8, 0), emptyList()))
     }
 
+    @Test fun nextDigestEveryFewMinutes() {
+        val at = { h: Int, m: Int -> LocalDateTime.of(2026, 11, 1, h, m) }
+        assertEquals(at(10, 15), Rules.nextDigest(at(10, 0), emptyList(), 15))
+        assertEquals(at(10, 15), Rules.nextDigest(at(10, 14).plusSeconds(59), listOf(600), 15))
+        assertEquals(at(11, 0), Rules.nextDigest(at(10, 30), emptyList(), 30))
+        assertEquals(at(11, 0), Rules.nextDigest(at(10, 1), emptyList(), 60))
+        assertEquals(LocalDateTime.of(2026, 11, 2, 0, 0), Rules.nextDigest(at(23, 45), emptyList(), 15))
+    }
+
     // ---- Hush's own sound
 
     @Test fun playsTheAppsToneForNewInboxNotifications() {

@@ -166,8 +166,16 @@
     <string name="send">بفرست</string>
     <string name="reply_sent">فرستاده شد</string>
     <string name="reply_failed">فرستاده نشد. برای جواب، خود برنامه را باز کنید.</string>
-    <string name="digest">خلاصه در ساعت‌های مشخص</string>
-    <string name="digest_hint">خاموش: خلاصه‌ی بالای گوشی با رسیدن هر اعلان عوض می‌شود. روشن: فقط در این ساعت‌ها عوض می‌شود. صندوق خود هیس همیشه به‌روز است و برنامه‌های مهم، آدم‌ها و کلمه‌ها و تماس‌ها مثل قبل فوری شناور می‌شوند.</string>
+    <string name="digest">خلاصه‌ی زمان‌بندی‌شده</string>
+    <string name="digest_hint">خلاصه‌ی بالای گوشی فقط در زمان‌های زیر عوض می‌شود. صندوق خود هیس همیشه به‌روز است و برنامه‌های مهم، آدم‌ها و کلمه‌ها و تماس‌ها مثل قبل فوری شناور می‌شوند.</string>
     <string name="digest_silent">بی‌صدا</string>
     <string name="digest_soft">با یک صدای آرام</string>
+    <string name="digest_at">ساعت‌های مشخص</string>
+    <string name="digest_every">%1$d دقیقه</string>
+    <string name="digest_hourly">۱ ساعت</string>
+    <string name="digest_sum_at">خلاصه در ساعت‌های مشخص</string>
+    <string name="digest_sum_every">خلاصه هر %1$d دقیقه</string>
+    <string name="digest_late">اندروید برای صرفه‌جویی در باتری ممکن است چند دقیقه دیرتر اجرایش کند.</string>
+    <string name="digest_sound">صدا</string>
+    <string name="digest_how">هر چند وقت</string>
 </resources>

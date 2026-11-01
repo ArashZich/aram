@@ -149,7 +149,12 @@ object Rules {
 
     /** Minutes of the day; a range like 23:00–07:00 wraps past midnight. Equal ends mean no quiet time. */
     /** The next of the summary [times] (minutes of the day) after [now]; tomorrow's first when today's are past. */
-    fun nextDigest(now: LocalDateTime, times: List<Int>): LocalDateTime? {
+    /** [every] > 0: the next multiple of that many minutes after [now], counted from midnight; else the next of [times]. */
+    fun nextDigest(now: LocalDateTime, times: List<Int>, every: Int = 0): LocalDateTime? {
+        if (every > 0) {
+            val minute = now.hour * 60 + now.minute
+            return now.toLocalDate().atStartOfDay().plusMinutes(((minute / every + 1) * every).toLong())
+        }
         if (times.isEmpty()) return null
         val today = now.toLocalDate().atStartOfDay()
         return times.sorted().map { today.plusMinutes(it.toLong()) }.firstOrNull { it.isAfter(now) }

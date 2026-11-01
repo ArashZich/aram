@@ -1,0 +1,1 @@
+Scheduled summary can now come every 15, 30 or 60 minutes, not only at set hours.

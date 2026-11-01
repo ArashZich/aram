@@ -327,7 +327,7 @@ class SettingActivity : Activity() {
         }
     }
 
-    // Off by default: the summary follows the inbox. On: it changes only at these times.
+    // Off by default: the summary follows the inbox. On: it changes only at these times, or every N minutes.
     private fun bindDigest() {
         val more = findViewById<View>(R.id.digest_more)
         findViewById<Switch>(R.id.digest_on).apply {
@@ -356,6 +356,23 @@ class SettingActivity : Activity() {
             }
         }
         times()
+        val late = findViewById<View>(R.id.digest_late)
+        fun mode() {
+            row.visibility = if (store.digestEvery == 0) View.VISIBLE else View.GONE
+            late.visibility = if (store.digestEvery == 0) View.GONE else View.VISIBLE
+        }
+        mode()
+        choices(findViewById(R.id.digest_modes), listOf(0, 15, 30, 60), {
+            when (it) {
+                0 -> getString(R.string.digest_at)
+                60 -> getString(R.string.digest_hourly)
+                else -> getString(R.string.digest_every, it)
+            }
+        }, { store.digestEvery }) {
+            store.digestEvery = it
+            Digest.arm(this)
+            mode()
+        }
         choices(findViewById(R.id.digest_sounds), listOf(0, 1),
             { getString(if (it == 1) R.string.digest_soft else R.string.digest_silent) },
             { if (store.digestSound) 1 else 0 }) { store.digestSound = it == 1 }

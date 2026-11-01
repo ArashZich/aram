@@ -74,6 +74,11 @@ class Store(c: Context) {
         get() = p.getString("digest_times", "600,840,1140")!!.split(',').mapNotNull { it.toIntOrNull() }.sorted()
         set(v) = p.edit().putString("digest_times", v.sorted().joinToString(",")).apply()
 
+    /** Minutes between summaries; 0 means at [digestTimes]. */
+    var digestEvery: Int
+        get() = p.getInt("digest_every", 0)
+        set(v) = p.edit().putInt("digest_every", v).apply()
+
     /** Whether the summary comes with one soft sound at those times, or silently. */
     var digestSound: Boolean
         get() = p.getBoolean("digest_sound", false)

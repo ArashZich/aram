@@ -50,8 +50,8 @@ reach you right away.
 - **People and words**: a name or a word always floats, even from an app you silenced
 - **Quiet hours**: nothing floats at night except calls and alarms
 - **No floods**: one app floats at most once a minute (or every 5 min, or every time)
-- **Summary at set hours** (off by default): the shade's summary changes only at your times (10:00, 14:00, 19:00),
-  silently or with one soft sound; the inbox in the app stays live
+- **Scheduled summary** (off by default): the shade's summary changes only at your times (10:00, 14:00, 19:00) or
+  every 15, 30 or 60 minutes, silently or with one soft sound; the inbox in the app stays live
 - Quick Settings tile, English and Persian (RTL), light and dark, calm blue
 - No internet permission, no Google services, no libraries — nothing leaves the phone
 
@@ -139,7 +139,7 @@ keyPassword=...
 - **جواب**: پیام‌هایی که در کشو دکمه‌ی جواب دارند (تلگرام، واتس‌اپ، پیامک…) داخل هیس هم «جواب» دارند
 - **تاریخچه**: همه‌چیز چند روز اخیر، با جست‌وجو
 - **آمار**: تقویم ماه با شلوغی هر روز، نوتیف‌های آن روز، و پرسروصداترین برنامه‌های هفته با «ساکتش کن»
-- **خلاصه در ساعت‌های مشخص** (پیش‌فرض خاموش): خلاصه‌ی کشو فقط در ساعت‌های دلخواه عوض می‌شود، بی‌صدا یا با یک صدای آرام
+- **خلاصه‌ی زمان‌بندی‌شده** (پیش‌فرض خاموش): خلاصه‌ی کشو فقط در ساعت‌های دلخواه یا هر ۱۵، ۳۰ یا ۶۰ دقیقه عوض می‌شود، بی‌صدا یا با یک صدای آرام
 - چهار سطح برای هر برنامه: **مهم** (شناور + صندوق)، **صندوق**، **ساکت** (خوانده‌شده)، **کشو** (دست نمی‌زند)
 - آدم‌ها و کلمه‌های مهم همیشه شناور می‌شوند؛ ساعت سکوت؛ جلوگیری از رگبار نوتیف
 - تماس، زنگ ساعت، موسیقی و مسیریابی دست‌نخورده می‌مانند
