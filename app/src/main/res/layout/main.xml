@@ -20,6 +20,11 @@
             android:visibility="gone" />
 
         <include
+            android:id="@+id/page_stats"
+            layout="@layout/stats_page"
+            android:visibility="gone" />
+
+        <include
             android:id="@+id/page_settings"
             layout="@layout/settings_page"
             android:visibility="gone" />
@@ -37,6 +42,10 @@
 
         <include
             android:id="@+id/tab_history"
+            layout="@layout/tab" />
+
+        <include
+            android:id="@+id/tab_stats"
             layout="@layout/tab" />
 
         <include

@@ -156,4 +156,25 @@ class RulesTest {
         assertFalse(Rules.plays(Incoming("tg", "Sara", "hi", repeat = true), Level.NORMAL, "drop", false, 10_000))
         assertFalse(Rules.plays(Incoming("tg", "Sara", "hi", dnd = true), Level.NORMAL, "drop", false, 10_000))
     }
+
+    // ---- stats
+
+    @Test fun calendarShadesAndGrid() {
+        assertEquals(0, Rules.shade(0, 50))
+        assertEquals(1, Rules.shade(1, 50))
+        assertEquals(4, Rules.shade(50, 50))
+        assertEquals(2, Rules.shade(25, 50))
+        val g = Rules.grid(lead = 3, days = 30)
+        assertEquals(35, g.size)
+        assertNull(g[2])
+        assertEquals(1, g[3])
+        assertEquals(30, g[32])
+        assertEquals(28, Rules.grid(0, 28).size)
+    }
+
+    @Test fun noisyAppsAreOnlyLoudOnes() {
+        val apps = listOf("ig" to 40, "tg" to 25, "bank" to 30, "sms" to 5)
+        val levels = mapOf("tg" to Level.SILENT, "bank" to Level.SHADE)
+        assertEquals(setOf("ig"), Rules.noisy(apps, { levels[it] ?: Level.NORMAL }))
+    }
 }

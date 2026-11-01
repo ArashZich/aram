@@ -110,6 +110,16 @@
     <string name="sound_hint_on">Hush plays this sound for %1$s. Turn off %1$s\'s own sound (button above) so you hear only one.</string>
     <string name="sound_hint_off">Choose a sound and Hush plays it when this app\'s notifications arrive.</string>
     <string name="version">Hush %1$s</string>
+    <string name="tab_stats">Stats</string>
+    <string name="month_prev">Previous month</string>
+    <string name="month_next">Next month</string>
+    <string name="day_none">%1$s · no notifications</string>
+    <string name="day_count">%1$s · %2$s notifications</string>
+    <string name="day_old">The history no longer keeps this day\'s texts, only how many there were.</string>
+    <string name="week_title">Last 7 days</string>
+    <string name="week_total">%1$s notifications</string>
+    <string name="make_silent">Make silent</string>
+    <string name="made_silent">%1$s is silent now</string>
     <string name="copy_text">Copy text</string>
     <string name="sound_settings">Sound and vibration (Android)</string>
     <string name="just_now">now</string>

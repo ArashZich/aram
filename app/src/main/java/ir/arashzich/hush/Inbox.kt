@@ -113,6 +113,7 @@ object Inbox {
     /** Old history goes, with its pictures. */
     fun prune(c: Context) {
         Db.get(c).prune(System.currentTimeMillis() - Store(c).historyDays * DAY).forEach { picture(c, it).delete() }
+        Db.get(c).pruneDays(java.time.LocalDate.now().toEpochDay() - 400)
     }
 
     // ---- pictures: the sender's photo (a chat avatar) of each row, small, in the app's files

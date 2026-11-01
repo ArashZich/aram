@@ -10,6 +10,7 @@ import android.os.PowerManager
 import android.os.SystemClock
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
+import java.time.LocalDate
 import java.time.LocalTime
 
 /**
@@ -83,6 +84,7 @@ class Listener : NotificationListenerService() {
             dnd = !r.matchesInterruptionFilter(),
             repeat = !fresh && n.flags and Notification.FLAG_ONLY_ALERT_ONCE != 0,
         )
+        if (posted && fresh && !summary && !incoming.ongoing) Db.get(this).count(pkg, LocalDate.now().toEpochDay())
         val level = store.level(pkg)
         val now = SystemClock.elapsedRealtime()
         val quiet = store.quietOn && LocalTime.now().let {

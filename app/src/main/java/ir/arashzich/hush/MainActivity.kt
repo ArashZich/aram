@@ -27,10 +27,15 @@ class MainActivity : Activity() {
     private lateinit var store: Store
     private lateinit var settings: SettingsPage
     private lateinit var history: HistoryPage
+    private lateinit var stats: StatsPage
     private var tab = 0
-    private val pages by lazy { listOf(R.id.page_inbox, R.id.page_history, R.id.page_settings).map { findViewById<View>(it) } }
-    private val tabs by lazy { listOf(R.id.tab_inbox, R.id.tab_history, R.id.tab_settings).map { findViewById<View>(it) } }
-    private val refresh: () -> Unit = { renderInbox(); history.render() }
+    private val pages by lazy { listOf(R.id.page_inbox, R.id.page_history, R.id.page_stats, R.id.page_settings).map { findViewById<View>(it) } }
+    private val tabs by lazy { listOf(R.id.tab_inbox, R.id.tab_history, R.id.tab_stats, R.id.tab_settings).map { findViewById<View>(it) } }
+    private val refresh: () -> Unit = {
+        renderInbox()
+        if (tab == 1) history.render()
+        if (tab == 2) stats.render()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,9 +43,10 @@ class MainActivity : Activity() {
         store = Store(this)
         settings = SettingsPage(this, findViewById(R.id.page_settings))
         history = HistoryPage(this, findViewById(R.id.page_history))
+        stats = StatsPage(this, findViewById(R.id.page_stats))
 
-        val icons = listOf(R.drawable.ic_inbox, R.drawable.ic_history, R.drawable.ic_tune)
-        val labels = listOf(R.string.tab_inbox, R.string.tab_history, R.string.tab_settings)
+        val icons = listOf(R.drawable.ic_inbox, R.drawable.ic_history, R.drawable.ic_stats, R.drawable.ic_tune)
+        val labels = listOf(R.string.tab_inbox, R.string.tab_history, R.string.tab_stats, R.string.tab_settings)
         tabs.forEachIndexed { i, t ->
             t.findViewById<ImageView>(R.id.tab_icon).setImageResource(icons[i])
             t.findViewById<TextView>(R.id.tab_label).setText(labels[i])
@@ -78,7 +84,7 @@ class MainActivity : Activity() {
     override fun onResume() {
         super.onResume()
         Inbox.watch(refresh)
-        if (tab == 2) settings.resume()
+        if (tab == SETTINGS) settings.resume()
         refresh()
         Inbox.postSummary(this)
     }
@@ -92,7 +98,11 @@ class MainActivity : Activity() {
         tab = i
         pages.forEachIndexed { j, p -> p.visibility = if (j == i) View.VISIBLE else View.GONE }
         tabs.forEachIndexed { j, t -> t.isSelected = j == i }
-        if (i == 2) settings.resume()
+        when (i) {
+            1 -> history.render()
+            2 -> stats.render()
+            SETTINGS -> settings.resume()
+        }
     }
 
     // ---- inbox
@@ -116,7 +126,7 @@ class MainActivity : Activity() {
                 action.isSelected = true
                 action.setText(R.string.turn_on)
                 action.setOnClickListener {
-                    if (Gate.ready(this)) { Gate.setOn(this, store, true); refresh() } else show(2)
+                    if (Gate.ready(this)) { Gate.setOn(this, store, true); refresh() } else show(SETTINGS)
                 }
             }
             open.isEmpty() -> {
@@ -156,5 +166,9 @@ class MainActivity : Activity() {
             visibility = if (unread > 0) View.VISIBLE else View.GONE
             text = if (unread > 99) "99+" else String.format(Locale.getDefault(), "%d", unread)
         }
+    }
+
+    companion object {
+        private const val SETTINGS = 3
     }
 }

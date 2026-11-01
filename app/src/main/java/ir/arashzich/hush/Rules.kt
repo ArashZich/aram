@@ -133,6 +133,20 @@ object Rules {
         tone != null && collect(n, level) && level != Level.SILENT && !n.summary && !quiet && !n.dnd &&
             !n.lowChannel && !n.repeat && sinceLast >= gap
 
+    /** How strong a calendar day is coloured: 0 for none, then 1–4 against the month's busiest day [max]. */
+    fun shade(n: Int, max: Int): Int = if (n <= 0 || max <= 0) 0 else minOf(4, (4 * n + max - 1) / max)
+
+    /** A month as weeks: [lead] empty cells before day 1, then 1..[days], filled up to whole weeks. */
+    fun grid(lead: Int, days: Int): List<Int?> {
+        val cells = List<Int?>(lead) { null } + (1..days)
+        return cells + List((7 - cells.size % 7) % 7) { null }
+    }
+
+    /** Apps worth silencing: at least [min] notifications in the week and not silent already. */
+    fun noisy(apps: List<Pair<String, Int>>, level: (String) -> Level, min: Int = 20): Set<String> =
+        apps.filter { it.second >= min && level(it.first).let { l -> l == Level.NORMAL || l == Level.IMPORTANT } }
+            .map { it.first }.toSet()
+
     /** Minutes of the day; a range like 23:00–07:00 wraps past midnight. Equal ends mean no quiet time. */
     fun inQuiet(minute: Int, from: Int, to: Int): Boolean = when {
         from == to -> false
