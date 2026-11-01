@@ -125,6 +125,14 @@ object Rules {
         Later.MORNING -> (if (now.hour < 5) now.toLocalDate() else now.toLocalDate().plusDays(1)).atTime(9, 0)
     }
 
+    /**
+     * Whether Hush plays the app's [tone] for this notification: a new one that goes into the inbox and is not
+     * silent, at most once per [gap] for the same app, never in quiet hours or what the app itself would not sound.
+     */
+    fun plays(n: Incoming, level: Level, tone: String?, quiet: Boolean, sinceLast: Long, gap: Long = 3000): Boolean =
+        tone != null && collect(n, level) && level != Level.SILENT && !n.summary && !quiet && !n.dnd &&
+            !n.lowChannel && !n.repeat && sinceLast >= gap
+
     /** Minutes of the day; a range like 23:00–07:00 wraps past midnight. Equal ends mean no quiet time. */
     fun inQuiet(minute: Int, from: Int, to: Int): Boolean = when {
         from == to -> false

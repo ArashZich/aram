@@ -31,6 +31,7 @@ reach you right away.
 - Chats are kept as one conversation: a new Telegram message updates its row instead of adding a new one
 - **Copy code**: a verification code (OTP) gets its own chip — one tap copies it. Persian digits work too
 - **Remind me later**: hold a notification → in 1 hour, this evening or tomorrow morning; it comes back with a sound
+- **Sound per app**: give Telegram (or any app) one of Hush's six calm tones; Hush plays it when its notifications arrive
 - **History**: everything of the last days, searchable, also what you cleared (7, 30 or 90 days)
 
 **Per app**, four levels:
@@ -128,6 +129,7 @@ keyPassword=...
 - صندوق نوتیف‌ها: هر برنامه جدا، با عکس فرستنده، متن کامل و زمان؛ زدن، دقیقاً همان چت یا ایمیل را باز می‌کند
 - **کپی کد**: کد تأیید (رمز یکبار مصرف) یک دکمه‌ی جدا دارد، حتی با عددهای فارسی
 - **بعداً یادم بنداز**: یک ساعت دیگر، امشب یا فردا صبح
+- **صدای هر برنامه**: برای تلگرام یا هر برنامه یکی از شش صدای آرام هیس را انتخاب کن
 - **تاریخچه**: همه‌چیز چند روز اخیر، با جست‌وجو
 - چهار سطح برای هر برنامه: **مهم** (شناور + صندوق)، **صندوق**، **ساکت** (خوانده‌شده)، **کشو** (دست نمی‌زند)
 - آدم‌ها و کلمه‌های مهم همیشه شناور می‌شوند؛ ساعت سکوت؛ جلوگیری از رگبار نوتیف

@@ -41,8 +41,8 @@ object Inbox {
     fun unwatch(f: () -> Unit) { watchers -= f }
 
     /** After every change: the summary follows the inbox and open screens redraw. */
-    fun changed(c: Context) {
-        postSummary(c.applicationContext)
+    fun changed(c: Context, tone: String? = null) {
+        postSummary(c.applicationContext, tone)
         main.post { watchers.toList().forEach { it() } }
     }
 
@@ -70,8 +70,11 @@ object Inbox {
     fun canPost(c: Context) = Build.VERSION.SDK_INT < 33 ||
         c.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED
 
-    /** "12 new notifications · Telegram 8 · Gmail 3": one quiet line instead of a shade full of cards. */
-    fun postSummary(c: Context) {
+    /**
+     * "12 new notifications · Telegram 8 · Gmail 3": one quiet line instead of a shade full of cards.
+     * With a [tone] this one update sounds: it is posted on that tone's channel.
+     */
+    fun postSummary(c: Context, tone: String? = null) {
         val nm = c.getSystemService(NotificationManager::class.java)
         val unread = Db.get(c).open().filter { !it.read }
         if (!Store(c).on || unread.isEmpty() || !canPost(c)) {
@@ -91,14 +94,14 @@ object Inbox {
         val tap = PendingIntent.getActivity(c, 0,
             Intent(c, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP),
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
-        val n = Notification.Builder(c, CHANNEL)
+        val n = Notification.Builder(c, tone?.let { Sounds.channel(c, it) } ?: CHANNEL)
             .setSmallIcon(R.drawable.ic_tile)
             .setColor(c.getColor(R.color.accent))
             .setContentTitle(title)
             .setContentText(Rules.summaryLine(groups.map { label(c, it.pkg) to it.unread }))
             .setStyle(style)
             .setContentIntent(tap)
-            .setOnlyAlertOnce(true)
+            .setOnlyAlertOnce(tone == null)
             .setNumber(unread.size)
             .build()
         nm.notify(SUMMARY, n)

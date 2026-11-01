@@ -57,6 +57,7 @@ class AppActivity : Activity() {
             emptyView = findViewById(R.id.empty)
         }
         levels()
+        sound()
     }
 
     override fun onResume() {
@@ -97,6 +98,28 @@ class AppActivity : Activity() {
         }
         select()
         chips.forEach { chip -> chip.setOnClickListener { store.setLevel(pkg, chip.tag as Level); select() } }
+    }
+
+    // Hush's tone for this app; the app's own sound has to be muted in Android's settings, Hush cannot do that.
+    private fun sound() {
+        val chip = findViewById<TextView>(R.id.sound)
+        val mute = findViewById<View>(R.id.mute_app)
+        val hint = findViewById<TextView>(R.id.sound_hint)
+        fun show() {
+            val tone = store.sound(pkg)
+            chip.text = getString(R.string.sound_is, Sounds.name(this, tone))
+            chip.isSelected = tone != null
+            mute.visibility = if (tone != null) View.VISIBLE else View.GONE
+            hint.text = if (tone != null) getString(R.string.sound_hint_on, Inbox.label(this, pkg))
+            else getString(R.string.sound_hint_off)
+        }
+        show()
+        chip.setOnClickListener { Sounds.pick(this, store.sound(pkg)) { store.setSound(pkg, it); show() } }
+        mute.setOnClickListener {
+            runCatching {
+                startActivity(Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).putExtra(Settings.EXTRA_APP_PACKAGE, pkg))
+            }
+        }
     }
 
     companion object {

@@ -72,6 +72,14 @@ class SettingsPage(private val a: Activity, private val root: View) {
         val levels = levelNames.keys.toList()
         choices(root.findViewById(R.id.defaults), levels.indices.toList(), { a.getString(levelNames.getValue(levels[it])) },
             { levels.indexOf(store.defaultLevel) }) { store.defaultLevel = levels[it]; renderApps() }
+        root.findViewById<TextView>(R.id.default_sound).apply {
+            fun show() {
+                text = a.getString(R.string.sound_is, Sounds.name(a, store.defaultSound))
+                isSelected = store.defaultSound != null
+            }
+            show()
+            setOnClickListener { Sounds.pick(a, store.defaultSound) { store.defaultSound = it; show() } }
+        }
         choices(root.findViewById(R.id.keeps), listOf(7, 30, 90), { a.getString(R.string.days, it) },
             { store.historyDays }) { store.historyDays = it; Inbox.prune(a); Inbox.changed(a) }
 

@@ -20,6 +20,7 @@ class Listener : NotificationListenerService() {
     private lateinit var store: Store
     private val seen = HashSet<String>()             // keys already counted, to tell a new notification from an update
     private val lastFloat = HashMap<String, Long>()  // package -> elapsed time of its last card
+    private val lastSound = HashMap<String, Long>()  // package -> elapsed time of its last tone
 
     override fun onCreate() {
         super.onCreate()
@@ -94,7 +95,13 @@ class Listener : NotificationListenerService() {
         if (Rules.collect(incoming, level)) {
             if (!summary) entry = save(sbn, title, level)
             cancelNotification(sbn.key)
-            if (posted) Inbox.changed(this)
+            if (posted) {
+                val tone = store.sound(pkg)
+                val sounds = entry != null &&
+                    Rules.plays(incoming, level, tone, quiet, now - (lastSound[pkg] ?: Long.MIN_VALUE / 2))
+                if (sounds) lastSound[pkg] = now
+                Inbox.changed(this, if (sounds) tone else null)
+            }
         } else if (action == Action.REMOVE) {
             cancelNotification(sbn.key)
         }

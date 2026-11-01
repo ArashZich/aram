@@ -64,6 +64,16 @@ class Store(c: Context) {
         get() = p.getInt("history_days", 30)
         set(v) = p.edit().putInt("history_days", v).apply()
 
+    /** Hush's tone for apps the user has not given one; null means Hush plays nothing. */
+    var defaultSound: String?
+        get() = p.getString("default_sound", null)
+        set(v) = p.edit().putString("default_sound", v).apply()
+
+    // An empty value is "no tone" chosen for that app, a missing one follows [defaultSound].
+    fun sound(pkg: String): String? = if (p.contains("snd:$pkg")) p.getString("snd:$pkg", "")!!.ifEmpty { null } else defaultSound
+
+    fun setSound(pkg: String, tone: String?) = p.edit().putString("snd:$pkg", tone.orEmpty()).apply()
+
     /** Reminders still to come: row id -> time. */
     val reminders: Map<Long, Long>
         get() = p.getStringSet("remind", emptySet())!!.associate {
