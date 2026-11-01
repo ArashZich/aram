@@ -59,6 +59,18 @@ android {
         includeInBundle = false
     }
 
+    // GitHub releases also get one APK per CPU type (./release.sh passes -PabiSplits); F-Droid builds the universal one.
+    if (project.hasProperty("abiSplits")) {
+        splits {
+            abi {
+                isEnable = true
+                reset()
+                include("arm64-v8a", "armeabi-v7a", "x86_64", "x86")
+                isUniversalApk = true
+            }
+        }
+    }
+
     lint { abortOnError = false }
 }
 
