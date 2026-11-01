@@ -112,7 +112,6 @@
     <string name="tone_bubble">حباب</string>
     <string name="tone_bowl">کاسه</string>
     <string name="tone_tick">تیک</string>
-    <string name="channel_tone">صدا: %1$s</string>
     <string name="mute_app">بی‌صدا کردن خود برنامه</string>
     <string name="sound_hint_on">هیس برای %1$s این صدا را پخش می‌کند. صدای خود %1$s را خاموش کن (دکمه‌ی بالا) تا فقط یک صدا بشنوی.</string>
     <string name="sound_hint_off">یک صدا انتخاب کن تا هیس موقع رسیدن نوتیف‌های این برنامه پخشش کند.</string>

@@ -11,6 +11,9 @@
     <!-- "Turn off and uninstall" opens Android's uninstall screen after restoring the phone's own settings. -->
     <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
 
+    <!-- Hush's own tones buzz briefly, as a notification would. -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <!-- "Remind me later" alarms come back after a restart. -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 

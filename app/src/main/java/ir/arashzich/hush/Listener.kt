@@ -32,6 +32,7 @@ class Listener : NotificationListenerService() {
         live = this
         activeNotifications?.forEach { seen += it.key; store.remember(it.packageName) }
         Gate.sync(this, store)
+        Sounds.dropOldChannels(this)
         Inbox.prune(this)
         sweepNow()
     }
@@ -101,8 +102,11 @@ class Listener : NotificationListenerService() {
                 val tone = if (store.digestOn) null else store.sound(pkg)  // at set hours it sounds only then
                 val sounds = entry != null &&
                     Rules.plays(incoming, level, tone, quiet, now - (lastSound[pkg] ?: Long.MIN_VALUE / 2))
-                if (sounds) lastSound[pkg] = now
-                Inbox.changed(this, if (sounds) tone else null)
+                if (sounds) {
+                    lastSound[pkg] = now
+                    Sounds.ring(this, tone!!)
+                }
+                Inbox.changed(this)
             }
         } else if (action == Action.REMOVE) {
             cancelNotification(sbn.key)

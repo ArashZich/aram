@@ -1,6 +1,7 @@
 package ir.arashzich.hush
 
 import android.app.AlarmManager
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -17,7 +18,10 @@ class Digest : BroadcastReceiver() {
         val store = Store(c)
         if (i.action == FIRE && store.digestOn) {
             store.digestUntil = System.currentTimeMillis()
-            Inbox.changed(c, if (store.digestSound) store.defaultSound ?: SOFT else null)
+            Inbox.changed(c)
+            val quiet = c.getSystemService(NotificationManager::class.java).currentInterruptionFilter >
+                NotificationManager.INTERRUPTION_FILTER_ALL
+            if (store.digestSound && !quiet) Sounds.ring(c, store.defaultSound ?: SOFT)
         }
         arm(c)
     }

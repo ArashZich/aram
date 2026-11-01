@@ -69,9 +69,9 @@ object Inbox {
     fun unwatch(f: () -> Unit) { watchers -= f }
 
     /** After every change: the summary follows the inbox and open screens redraw. */
-    fun changed(c: Context, tone: String? = null) {
+    fun changed(c: Context) {
         val app = c.applicationContext
-        io.execute { runCatching { postSummary(app, tone) } }
+        io.execute { runCatching { postSummary(app) } }
         main.post { watchers.toList().forEach { it() } }
     }
 
@@ -106,9 +106,8 @@ object Inbox {
 
     /**
      * "12 new notifications · Telegram 8 · Gmail 3": one quiet line instead of a shade full of cards.
-     * With a [tone] this one update sounds: it is posted on that tone's channel.
      */
-    fun postSummary(c: Context, tone: String? = null) {
+    fun postSummary(c: Context) {
         val nm = c.getSystemService(NotificationManager::class.java)
         val store = Store(c)
         // At set hours the shade shows only what arrived until the last of those times; the app's inbox stays live.
@@ -130,14 +129,14 @@ object Inbox {
         val tap = PendingIntent.getActivity(c, 0,
             Intent(c, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP),
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
-        val n = Notification.Builder(c, tone?.let { Sounds.channel(c, it) } ?: CHANNEL)
+        val n = Notification.Builder(c, CHANNEL)
             .setSmallIcon(R.drawable.ic_tile)
             .setColor(c.getColor(R.color.accent))
             .setContentTitle(title)
             .setContentText(Rules.summaryLine(groups.map { label(c, it.pkg) to it.unread }))
             .setStyle(style)
             .setContentIntent(tap)
-            .setOnlyAlertOnce(tone == null)
+            .setOnlyAlertOnce(true)
             .setNumber(unread.size)
             .build()
         nm.notify(SUMMARY, n)

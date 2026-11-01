@@ -112,7 +112,6 @@
     <string name="tone_bubble">Bubble</string>
     <string name="tone_bowl">Bowl</string>
     <string name="tone_tick">Tick</string>
-    <string name="channel_tone">Sound: %1$s</string>
     <string name="mute_app">Mute app\'s sound</string>
     <string name="sound_hint_on">Hush plays this sound for %1$s. Turn off %1$s\'s own sound (button above) so you hear only one.</string>
     <string name="sound_hint_off">Choose a sound and Hush plays it when this app\'s notifications arrive.</string>
