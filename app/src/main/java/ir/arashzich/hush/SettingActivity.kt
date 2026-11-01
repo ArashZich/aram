@@ -316,6 +316,7 @@ class SettingActivity : Activity() {
             { store.gapSeconds }) { store.gapSeconds = it }
         choices(findViewById(R.id.stays), listOf(4, 8, 12), { getString(R.string.seconds, it) },
             { store.showSeconds }) { store.showSeconds = it }
+        bindDigest()
         findViewById<View>(R.id.test).setOnClickListener {
             if (!Gate.canDraw(this)) {
                 Toast.makeText(this, R.string.need_setup, Toast.LENGTH_SHORT).show()
@@ -326,9 +327,45 @@ class SettingActivity : Activity() {
         }
     }
 
+    // Off by default: the summary follows the inbox. On: it changes only at these times.
+    private fun bindDigest() {
+        val more = findViewById<View>(R.id.digest_more)
+        findViewById<Switch>(R.id.digest_on).apply {
+            isChecked = store.digestOn
+            more.visibility = if (isChecked) View.VISIBLE else View.GONE
+            setOnCheckedChangeListener { _, on ->
+                Digest.set(this@SettingActivity, on)
+                more.visibility = if (on) View.VISIBLE else View.GONE
+            }
+        }
+        val row = findViewById<LinearLayout>(R.id.digest_times)
+        fun times() {
+            row.removeAllViews()
+            store.digestTimes.forEachIndexed { i, t ->
+                (layoutInflater.inflate(R.layout.chip, row, false) as TextView).apply {
+                    text = clock(t)
+                    setOnClickListener {
+                        TimePickerDialog(this@SettingActivity, { _, h, m ->
+                            store.digestTimes = store.digestTimes.toMutableList().also { it[i] = h * 60 + m }.distinct()
+                            Digest.arm(this@SettingActivity)
+                            times()
+                        }, t / 60, t % 60, true).show()
+                    }
+                    row.addView(this)
+                }
+            }
+        }
+        times()
+        choices(findViewById(R.id.digest_sounds), listOf(0, 1),
+            { getString(if (it == 1) R.string.digest_soft else R.string.digest_silent) },
+            { if (store.digestSound) 1 else 0 }) { store.digestSound = it == 1 }
+    }
+
+    private fun clock(m: Int) = String.format(Locale.getDefault(), "%02d:%02d", m / 60, m % 60)
+
     private fun bindTime(id: Int, get: () -> Int, set: (Int) -> Unit) {
         val b = findViewById<TextView>(id)
-        fun show() { b.text = String.format(Locale.getDefault(), "%02d:%02d", get() / 60, get() % 60) }
+        fun show() { b.text = clock(get()) }
         show()
         b.setOnClickListener {
             TimePickerDialog(this, { _, h, m -> set(h * 60 + m); show() }, get() / 60, get() % 60, true).show()

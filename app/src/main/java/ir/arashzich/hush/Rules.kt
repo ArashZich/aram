@@ -148,6 +148,14 @@ object Rules {
             .map { it.first }.toSet()
 
     /** Minutes of the day; a range like 23:00–07:00 wraps past midnight. Equal ends mean no quiet time. */
+    /** The next of the summary [times] (minutes of the day) after [now]; tomorrow's first when today's are past. */
+    fun nextDigest(now: LocalDateTime, times: List<Int>): LocalDateTime? {
+        if (times.isEmpty()) return null
+        val today = now.toLocalDate().atStartOfDay()
+        return times.sorted().map { today.plusMinutes(it.toLong()) }.firstOrNull { it.isAfter(now) }
+            ?: today.plusDays(1).plusMinutes(times.min().toLong())
+    }
+
     fun inQuiet(minute: Int, from: Int, to: Int): Boolean = when {
         from == to -> false
         from < to -> minute in from until to

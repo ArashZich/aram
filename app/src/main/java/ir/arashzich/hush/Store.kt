@@ -64,6 +64,26 @@ class Store(c: Context) {
         get() = p.getInt("history_days", 30)
         set(v) = p.edit().putInt("history_days", v).apply()
 
+    /** Summary at set hours; off, the shade's summary follows the inbox as it fills. */
+    var digestOn: Boolean
+        get() = p.getBoolean("digest_on", false)
+        set(v) = p.edit().putBoolean("digest_on", v).apply()
+
+    /** Minutes of the day, in order. */
+    var digestTimes: List<Int>
+        get() = p.getString("digest_times", "600,840,1140")!!.split(',').mapNotNull { it.toIntOrNull() }.sorted()
+        set(v) = p.edit().putString("digest_times", v.sorted().joinToString(",")).apply()
+
+    /** Whether the summary comes with one soft sound at those times, or silently. */
+    var digestSound: Boolean
+        get() = p.getBoolean("digest_sound", false)
+        set(v) = p.edit().putBoolean("digest_sound", v).apply()
+
+    /** The last summary time: the shade shows what arrived until then. */
+    var digestUntil: Long
+        get() = p.getLong("digest_until", 0)
+        set(v) = p.edit().putLong("digest_until", v).apply()
+
     /** Hush's tone for apps the user has not given one; null means Hush plays nothing. */
     var defaultSound: String?
         get() = p.getString("default_sound", null)

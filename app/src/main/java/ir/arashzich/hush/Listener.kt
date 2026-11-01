@@ -98,7 +98,7 @@ class Listener : NotificationListenerService() {
             if (!summary) entry = save(sbn, title, level)
             cancelNotification(sbn.key)
             if (posted) {
-                val tone = store.sound(pkg)
+                val tone = if (store.digestOn) null else store.sound(pkg)  // at set hours it sounds only then
                 val sounds = entry != null &&
                     Rules.plays(incoming, level, tone, quiet, now - (lastSound[pkg] ?: Long.MIN_VALUE / 2))
                 if (sounds) lastSound[pkg] = now

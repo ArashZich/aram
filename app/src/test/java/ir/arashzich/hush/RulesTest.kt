@@ -142,6 +142,18 @@ class RulesTest {
         assertEquals(LocalDateTime.of(2026, 11, 2, 9, 0), Rules.later(LocalDateTime.of(2026, 11, 2, 2, 0), Later.MORNING))
     }
 
+    // ---- summary at set hours
+
+    @Test fun nextDigestTime() {
+        val times = listOf(1140, 600, 840)
+        val at = { h: Int, m: Int -> LocalDateTime.of(2026, 11, 1, h, m) }
+        assertEquals(at(10, 0), Rules.nextDigest(at(8, 0), times))
+        assertEquals(at(14, 0), Rules.nextDigest(at(10, 0), times))
+        assertEquals(at(19, 0), Rules.nextDigest(at(18, 59), times))
+        assertEquals(LocalDateTime.of(2026, 11, 2, 10, 0), Rules.nextDigest(at(19, 0), times))
+        assertNull(Rules.nextDigest(at(8, 0), emptyList()))
+    }
+
     // ---- Hush's own sound
 
     @Test fun playsTheAppsToneForNewInboxNotifications() {

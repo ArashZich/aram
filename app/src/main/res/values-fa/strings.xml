@@ -157,4 +157,8 @@
     <string name="send">بفرست</string>
     <string name="reply_sent">فرستاده شد</string>
     <string name="reply_failed">فرستاده نشد. برای جواب، خود برنامه را باز کنید.</string>
+    <string name="digest">خلاصه در ساعت‌های مشخص</string>
+    <string name="digest_hint">خاموش: خلاصه‌ی بالای گوشی با رسیدن هر اعلان عوض می‌شود. روشن: فقط در این ساعت‌ها عوض می‌شود. صندوق خود هیس همیشه به‌روز است و برنامه‌های مهم، آدم‌ها و کلمه‌ها و تماس‌ها مثل قبل فوری شناور می‌شوند.</string>
+    <string name="digest_silent">بی‌صدا</string>
+    <string name="digest_soft">با یک صدای آرام</string>
 </resources>

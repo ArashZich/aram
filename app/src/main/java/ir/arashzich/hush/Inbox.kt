@@ -100,8 +100,10 @@ object Inbox {
      */
     fun postSummary(c: Context, tone: String? = null) {
         val nm = c.getSystemService(NotificationManager::class.java)
-        val unread = Db.get(c).open().filter { !it.read }
-        if (!Store(c).on || unread.isEmpty() || !canPost(c)) {
+        val store = Store(c)
+        // At set hours the shade shows only what arrived until the last of those times; the app's inbox stays live.
+        val unread = Db.get(c).open().filter { !it.read && (!store.digestOn || it.time <= store.digestUntil) }
+        if (!store.on || unread.isEmpty() || !canPost(c)) {
             nm.cancel(SUMMARY)
             return
         }
