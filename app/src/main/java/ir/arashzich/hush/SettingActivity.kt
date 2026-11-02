@@ -47,7 +47,6 @@ class SettingActivity : Activity() {
             APPS -> bindApps()
             WORDS -> page.findViewById<View>(R.id.add_word).setOnClickListener { addWord() }
             CALM -> bindCalm()
-            SOUND -> bindSound()
             HISTORY -> choices(page.findViewById(R.id.keeps), listOf(7, 30, 90), { getString(R.string.days, it) },
                 { store.historyDays }) { store.historyDays = it; Inbox.prune(this); Inbox.changed(this) }
             REMOVE -> page.findViewById<View>(R.id.uninstall).setOnClickListener { uninstall() }
@@ -373,9 +372,6 @@ class SettingActivity : Activity() {
             Digest.arm(this)
             mode()
         }
-        choices(findViewById(R.id.digest_sounds), listOf(0, 1),
-            { getString(if (it == 1) R.string.digest_soft else R.string.digest_silent) },
-            { if (store.digestSound) 1 else 0 }) { store.digestSound = it == 1 }
     }
 
     private fun clock(m: Int) = String.format(Locale.getDefault(), "%02d:%02d", m / 60, m % 60)
@@ -386,19 +382,6 @@ class SettingActivity : Activity() {
         show()
         b.setOnClickListener {
             TimePickerDialog(this, { _, h, m -> set(h * 60 + m); show() }, get() / 60, get() % 60, true).show()
-        }
-    }
-
-    // ---- sound
-
-    private fun bindSound() {
-        findViewById<TextView>(R.id.default_sound).apply {
-            fun show() {
-                text = getString(R.string.sound_is, Sounds.name(this@SettingActivity, store.defaultSound))
-                isSelected = store.defaultSound != null
-            }
-            show()
-            setOnClickListener { Sounds.pick(this@SettingActivity, store.defaultSound) { store.defaultSound = it; show() } }
         }
     }
 
@@ -437,19 +420,18 @@ class SettingActivity : Activity() {
         const val APPS = 1
         const val WORDS = 2
         const val CALM = 3
-        const val SOUND = 4
         const val HISTORY = 5
         const val REMOVE = 6
         private const val LOADING = "loading"
 
         val titles = mapOf(
             STATUS to R.string.set_status, APPS to R.string.apps_title, WORDS to R.string.words_title,
-            CALM to R.string.calm_title, SOUND to R.string.sound, HISTORY to R.string.set_history,
+            CALM to R.string.calm_title, HISTORY to R.string.set_history,
             REMOVE to R.string.remove_title,
         )
         private val layouts = mapOf(
             STATUS to R.layout.set_status, APPS to R.layout.set_apps, WORDS to R.layout.set_words,
-            CALM to R.layout.set_calm, SOUND to R.layout.set_sound, HISTORY to R.layout.set_history,
+            CALM to R.layout.set_calm, HISTORY to R.layout.set_history,
             REMOVE to R.layout.set_remove,
         )
     }

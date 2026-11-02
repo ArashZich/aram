@@ -1,7 +1,6 @@
 package ir.arashzich.hush
 
 import android.app.AlarmManager
-import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -10,7 +9,7 @@ import java.time.LocalDateTime
 import java.time.ZoneId
 
 /**
- * Scheduled summary: the shade's summary changes only at the chosen times or every N minutes, silently or with one soft sound.
+ * Scheduled summary: the shade's summary changes only at the chosen times or every N minutes, silently.
  * One inexact alarm for the next time; it is set again after each time and after a restart.
  */
 class Digest : BroadcastReceiver() {
@@ -20,16 +19,12 @@ class Digest : BroadcastReceiver() {
         if (i.action == FIRE && store.digestOn) {
             store.digestUntil = System.currentTimeMillis()
             Inbox.changed(c)
-            val quiet = c.getSystemService(NotificationManager::class.java).currentInterruptionFilter >
-                NotificationManager.INTERRUPTION_FILTER_ALL
-            if (store.digestSound && !quiet) Sounds.ring(c, store.defaultSound ?: SOFT)
         }
         arm(c)
     }
 
     companion object {
         private const val FIRE = "ir.arashzich.hush.DIGEST"
-        private const val SOFT = "drop"
 
         /** Turning it on shows what is already waiting; off, the summary is live again. */
         fun set(c: Context, on: Boolean) {

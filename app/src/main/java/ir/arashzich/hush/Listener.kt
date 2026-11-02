@@ -24,7 +24,6 @@ class Listener : NotificationListenerService() {
     private lateinit var store: Store
     private val seen = HashSet<String>()             // keys already counted, to tell a new notification from an update
     private val lastFloat = HashMap<String, Long>()  // package -> elapsed time of its last card
-    private val lastSound = HashMap<String, Long>()  // package -> elapsed time of its last tone
 
     override fun onCreate() {
         super.onCreate()
@@ -35,9 +34,15 @@ class Listener : NotificationListenerService() {
         live = this
         activeNotifications?.forEach { seen += it.key; store.remember(it.packageName) }
         Gate.sync(this, store)
-        Sounds.dropOldChannels(this)
+        dropOldChannels()
         Inbox.prune(this)
         sweepNow()
+    }
+
+    // Hush 2.0–2.1 had tones of its own, one notification channel each; those channels go.
+    private fun dropOldChannels() {
+        val nm = getSystemService(NotificationManager::class.java)
+        nm.notificationChannels.filter { it.id.startsWith("tone_") }.forEach { nm.deleteNotificationChannel(it.id) }
     }
 
     override fun onListenerDisconnected() {
@@ -102,16 +107,7 @@ class Listener : NotificationListenerService() {
         if (Rules.collect(incoming, level)) {
             if (!summary) entry = save(sbn, title, level)
             cancelNotification(sbn.key)
-            if (posted) {
-                val tone = if (store.digestOn) null else store.sound(pkg)  // at set hours it sounds only then
-                val sounds = entry != null &&
-                    Rules.plays(incoming, level, tone, quiet, now - (lastSound[pkg] ?: Long.MIN_VALUE / 2))
-                if (sounds) {
-                    lastSound[pkg] = now
-                    Sounds.ring(this, tone!!)
-                }
-                Inbox.changed(this)
-            }
+            if (posted) Inbox.changed(this)
         } else if (action == Action.REMOVE) {
             cancelNotification(sbn.key)
         }

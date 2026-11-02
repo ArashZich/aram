@@ -93,28 +93,6 @@
     <string name="later_morning">فردا صبح، ساعت ۹</string>
     <string name="remind_set">یادت می‌ندازم: %1$s</string>
     <string name="channel_remind">یادآوری‌ها</string>
-    <string name="sound">صدا</string>
-    <string name="sound_is">صدا: %1$s</string>
-    <string name="tone_none">صدای خود برنامه</string>
-    <string name="tone_drop">قطره</string>
-    <string name="tone_chime">دینگ‌دانگ</string>
-    <string name="tone_glass">شیشه</string>
-    <string name="tone_bell">زنگوله</string>
-    <string name="tone_breeze">نسیم</string>
-    <string name="tone_pop">پاپ</string>
-    <string name="tone_harp">چنگ</string>
-    <string name="tone_marimba">ماریمبا</string>
-    <string name="tone_kalimba">کالیمبا</string>
-    <string name="tone_windchime">زنگوله‌ی باد</string>
-    <string name="tone_dingdong">دینگ‌دانگ</string>
-    <string name="tone_lullaby">لالایی</string>
-    <string name="tone_rise">اوج</string>
-    <string name="tone_bubble">حباب</string>
-    <string name="tone_bowl">کاسه</string>
-    <string name="tone_tick">تیک</string>
-    <string name="mute_app">بی‌صدا کردن خود برنامه</string>
-    <string name="sound_hint_on">هیس برای %1$s این صدا را پخش می‌کند. صدای خود %1$s را خاموش کن (دکمه‌ی بالا) تا فقط یک صدا بشنوی.</string>
-    <string name="sound_hint_off">یک صدا انتخاب کن تا هیس موقع رسیدن نوتیف‌های این برنامه پخشش کند.</string>
     <string name="version">هیس %1$s</string>
     <string name="tab_stats">آمار</string>
     <string name="month_prev">ماه قبل</string>
@@ -157,8 +135,6 @@
     </plurals>
     <string name="quiet_sum">ساعت سکوت %1$s تا %2$s</string>
     <string name="quiet_off">ساعت سکوت خاموش</string>
-    <string name="sound_default">صدای برنامه‌هایی که تعیین نکرده‌اید</string>
-    <string name="sound_default_hint">هر برنامه می‌تواند صدای خودش را داشته باشد: برنامه را از صندوق باز کنید و روی صدا بزنید.</string>
     <string name="keep_history_hint">اعلان‌های قدیمی‌تر پاک می‌شوند؛ تقویم آمار فقط تعدادشان را نگه می‌دارد.</string>
     <string name="loading">در حال بارگذاری…</string>
     <string name="reply">جواب</string>
@@ -168,14 +144,11 @@
     <string name="reply_failed">فرستاده نشد. برای جواب، خود برنامه را باز کنید.</string>
     <string name="digest">خلاصه‌ی زمان‌بندی‌شده</string>
     <string name="digest_hint">خلاصه‌ی بالای گوشی فقط در زمان‌های زیر عوض می‌شود. صندوق خود هیس همیشه به‌روز است و برنامه‌های مهم، آدم‌ها و کلمه‌ها و تماس‌ها مثل قبل فوری شناور می‌شوند.</string>
-    <string name="digest_silent">بی‌صدا</string>
-    <string name="digest_soft">با یک صدای آرام</string>
     <string name="digest_at">ساعت‌های مشخص</string>
     <string name="digest_every">%1$d دقیقه</string>
     <string name="digest_hourly">۱ ساعت</string>
     <string name="digest_sum_at">خلاصه در ساعت‌های مشخص</string>
     <string name="digest_sum_every">خلاصه هر %1$d دقیقه</string>
     <string name="digest_late">اندروید برای صرفه‌جویی در باتری ممکن است چند دقیقه دیرتر اجرایش کند.</string>
-    <string name="digest_sound">صدا</string>
     <string name="digest_how">هر چند وقت</string>
 </resources>

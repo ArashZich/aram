@@ -93,28 +93,6 @@
     <string name="later_morning">Tomorrow morning, 9:00</string>
     <string name="remind_set">I\'ll remind you %1$s</string>
     <string name="channel_remind">Reminders</string>
-    <string name="sound">Sound</string>
-    <string name="sound_is">Sound: %1$s</string>
-    <string name="tone_none">App\'s own</string>
-    <string name="tone_drop">Drop</string>
-    <string name="tone_chime">Chime</string>
-    <string name="tone_glass">Glass</string>
-    <string name="tone_bell">Bell</string>
-    <string name="tone_breeze">Breeze</string>
-    <string name="tone_pop">Pop</string>
-    <string name="tone_harp">Harp</string>
-    <string name="tone_marimba">Marimba</string>
-    <string name="tone_kalimba">Kalimba</string>
-    <string name="tone_windchime">Wind chime</string>
-    <string name="tone_dingdong">Ding-dong</string>
-    <string name="tone_lullaby">Lullaby</string>
-    <string name="tone_rise">Rise</string>
-    <string name="tone_bubble">Bubble</string>
-    <string name="tone_bowl">Bowl</string>
-    <string name="tone_tick">Tick</string>
-    <string name="mute_app">Mute app\'s sound</string>
-    <string name="sound_hint_on">Hush plays this sound for %1$s. Turn off %1$s\'s own sound (button above) so you hear only one.</string>
-    <string name="sound_hint_off">Choose a sound and Hush plays it when this app\'s notifications arrive.</string>
     <string name="version">Hush %1$s</string>
     <string name="tab_stats">Stats</string>
     <string name="month_prev">Previous month</string>
@@ -157,8 +135,6 @@
     </plurals>
     <string name="quiet_sum">Quiet hours %1$s–%2$s</string>
     <string name="quiet_off">Quiet hours off</string>
-    <string name="sound_default">Sound for apps you have not set</string>
-    <string name="sound_default_hint">Each app can have its own sound: open the app from the inbox and tap its sound.</string>
     <string name="keep_history_hint">Older notifications are deleted; the Stats calendar keeps only the counts.</string>
     <string name="loading">Loading…</string>
     <string name="reply">Reply</string>
@@ -168,14 +144,11 @@
     <string name="reply_failed">Could not send. Open the app to answer.</string>
     <string name="digest">Scheduled summary</string>
     <string name="digest_hint">The shade\'s summary changes only at the times below. The inbox here stays live, and Important apps, people and words, and calls still float at once.</string>
-    <string name="digest_silent">Silently</string>
-    <string name="digest_soft">With a soft sound</string>
     <string name="digest_at">Set hours</string>
     <string name="digest_every">%1$d min</string>
     <string name="digest_hourly">1 hour</string>
     <string name="digest_sum_at">summary at set hours</string>
     <string name="digest_sum_every">summary every %1$d min</string>
     <string name="digest_late">Android may run it a few minutes late to save battery.</string>
-    <string name="digest_sound">Sound</string>
     <string name="digest_how">How often</string>
 </resources>

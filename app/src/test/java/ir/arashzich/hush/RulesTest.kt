@@ -163,21 +163,6 @@ class RulesTest {
         assertEquals(LocalDateTime.of(2026, 11, 2, 0, 0), Rules.nextDigest(at(23, 45), emptyList(), 15))
     }
 
-    // ---- Hush's own sound
-
-    @Test fun playsTheAppsToneForNewInboxNotifications() {
-        val n = Incoming("tg", "Sara", "hi")
-        assertTrue(Rules.plays(n, Level.NORMAL, "drop", quiet = false, sinceLast = 10_000))
-        assertTrue(Rules.plays(n, Level.IMPORTANT, "drop", quiet = false, sinceLast = 10_000))
-        assertFalse(Rules.plays(n, Level.NORMAL, null, quiet = false, sinceLast = 10_000))
-        assertFalse(Rules.plays(n, Level.SILENT, "drop", quiet = false, sinceLast = 10_000))
-        assertFalse(Rules.plays(n, Level.SHADE, "drop", quiet = false, sinceLast = 10_000))
-        assertFalse(Rules.plays(n, Level.NORMAL, "drop", quiet = true, sinceLast = 10_000))
-        assertFalse(Rules.plays(n, Level.NORMAL, "drop", quiet = false, sinceLast = 1_000))
-        assertFalse(Rules.plays(Incoming("tg", "Sara", "hi", repeat = true), Level.NORMAL, "drop", false, 10_000))
-        assertFalse(Rules.plays(Incoming("tg", "Sara", "hi", dnd = true), Level.NORMAL, "drop", false, 10_000))
-    }
-
     // ---- stats
 
     @Test fun calendarShadesAndGrid() {

@@ -23,8 +23,8 @@ android {
         applicationId = "ir.arashzich.hush"
         minSdk = 26
         targetSdk = 36
-        versionCode = 6
-        versionName = "2.2.1"
+        versionCode = 7
+        versionName = "2.3.0"
         resourceConfigurations += listOf("en", "fa")
     }
 

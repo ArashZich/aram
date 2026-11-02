@@ -1,0 +1,1 @@
+Hush no longer plays sounds of its own: each notification keeps its app's own sound, as set in Android's settings.

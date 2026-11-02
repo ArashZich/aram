@@ -57,7 +57,6 @@ class SettingsPage(private val a: Activity, private val root: View) {
             else -> a.getString(R.string.digest_sum_every, store.digestEvery)
         }
         row(list, SettingActivity.CALM, listOfNotNull(quiet, digest).joinToString(" · "))
-        row(list, SettingActivity.SOUND, Sounds.name(a, store.defaultSound))
         row(list, SettingActivity.HISTORY, a.getString(R.string.days, store.historyDays))
         row(list, SettingActivity.REMOVE, null)
     }

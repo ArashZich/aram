@@ -79,25 +79,10 @@ class Store(c: Context) {
         get() = p.getInt("digest_every", 0)
         set(v) = p.edit().putInt("digest_every", v).apply()
 
-    /** Whether the summary comes with one soft sound at those times, or silently. */
-    var digestSound: Boolean
-        get() = p.getBoolean("digest_sound", false)
-        set(v) = p.edit().putBoolean("digest_sound", v).apply()
-
     /** The last summary time: the shade shows what arrived until then. */
     var digestUntil: Long
         get() = p.getLong("digest_until", 0)
         set(v) = p.edit().putLong("digest_until", v).apply()
-
-    /** Hush's tone for apps the user has not given one; null means Hush plays nothing. */
-    var defaultSound: String?
-        get() = p.getString("default_sound", null)
-        set(v) = p.edit().putString("default_sound", v).apply()
-
-    // An empty value is "no tone" chosen for that app, a missing one follows [defaultSound].
-    fun sound(pkg: String): String? = if (p.contains("snd:$pkg")) p.getString("snd:$pkg", "")!!.ifEmpty { null } else defaultSound
-
-    fun setSound(pkg: String, tone: String?) = p.edit().putString("snd:$pkg", tone.orEmpty()).apply()
 
     /** Reminders still to come: row id -> time. */
     val reminders: Map<Long, Long>
