@@ -1,0 +1,1 @@
+Hush checks every 15 minutes, and whenever it starts, that it still receives notifications, and reconnects if the phone dropped it. Fixed a double connection after an update.

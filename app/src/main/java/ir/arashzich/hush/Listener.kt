@@ -9,6 +9,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.PowerManager
 import android.os.SystemClock
 import android.service.notification.NotificationListenerService
@@ -176,13 +178,21 @@ class Listener : NotificationListenerService() {
          * bring it back, and then every notification stays in the shade. [requestRebind] alone does nothing then;
          * switching the component off and on makes Android bind it anew.
          */
-        fun wake(c: Context) {
-            if (live != null || !Gate.listening(c)) return
-            val me = ComponentName(c, Listener::class.java)
-            val pm = c.packageManager
-            pm.setComponentEnabledSetting(me, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP)
-            pm.setComponentEnabledSetting(me, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP)
-            requestRebind(me)
+        fun wake(c: Context, done: () -> Unit = {}) {
+            // A process that has just started is often being bound right now; binding it a second time on top of
+            // that leaves two connections, so it waits first.
+            Handler(Looper.getMainLooper()).postDelayed({
+                if (live == null && Gate.listening(c)) {
+                    val me = ComponentName(c, Listener::class.java)
+                    val pm = c.packageManager
+                    pm.setComponentEnabledSetting(me, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP)
+                    pm.setComponentEnabledSetting(me, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP)
+                    requestRebind(me)
+                }
+                done()
+            }, SETTLE)
         }
+
+        private const val SETTLE = 10_000L
     }
 }
