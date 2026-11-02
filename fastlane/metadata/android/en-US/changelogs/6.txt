@@ -1,0 +1,1 @@
+Hush reconnects by itself when the phone stopped it, so notifications no longer pile up in the shade. On Xiaomi phones, turn on Autostart for Hush (Security → Background autostart).

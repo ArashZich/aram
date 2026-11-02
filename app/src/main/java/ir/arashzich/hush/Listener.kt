@@ -3,7 +3,10 @@ package ir.arashzich.hush
 import android.app.KeyguardManager
 import android.app.Notification
 import android.app.NotificationManager
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.PowerManager
@@ -39,6 +42,7 @@ class Listener : NotificationListenerService() {
 
     override fun onListenerDisconnected() {
         if (live === this) live = null
+        wake(this)
     }
 
     override fun onDestroy() {
@@ -170,5 +174,19 @@ class Listener : NotificationListenerService() {
 
         /** Moves what is already in the shade into the inbox (Hush was just switched on). */
         fun sweep() = live?.sweepNow()
+
+        /**
+         * Connects the listener again when it was dropped: MIUI and others stop Hush in the background and do not
+         * bring it back, and then every notification stays in the shade. [requestRebind] alone does nothing then;
+         * switching the component off and on makes Android bind it anew.
+         */
+        fun wake(c: Context) {
+            if (live != null || !Gate.listening(c)) return
+            val me = ComponentName(c, Listener::class.java)
+            val pm = c.packageManager
+            pm.setComponentEnabledSetting(me, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP)
+            pm.setComponentEnabledSetting(me, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP)
+            requestRebind(me)
+        }
     }
 }

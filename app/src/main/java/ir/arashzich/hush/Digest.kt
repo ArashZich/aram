@@ -15,6 +15,7 @@ import java.time.ZoneId
  */
 class Digest : BroadcastReceiver() {
     override fun onReceive(c: Context, i: Intent) {
+        Listener.wake(c)
         val store = Store(c)
         if (i.action == FIRE && store.digestOn) {
             store.digestUntil = System.currentTimeMillis()

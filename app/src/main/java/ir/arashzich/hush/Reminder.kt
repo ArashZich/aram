@@ -17,8 +17,10 @@ import android.content.Intent
 class Reminder : BroadcastReceiver() {
     override fun onReceive(c: Context, i: Intent) {
         when (i.action) {
-            Intent.ACTION_BOOT_COMPLETED, Intent.ACTION_MY_PACKAGE_REPLACED ->
+            Intent.ACTION_BOOT_COMPLETED, Intent.ACTION_MY_PACKAGE_REPLACED -> {
+                Listener.wake(c)
                 Store(c).reminders.forEach { (id, at) -> arm(c, id, at) }
+            }
             FIRE -> fire(c, i.getLongExtra(ID, -1))
         }
     }

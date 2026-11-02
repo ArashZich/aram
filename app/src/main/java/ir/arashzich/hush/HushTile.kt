@@ -9,7 +9,10 @@ import android.service.quicksettings.TileService
 
 /** Quick Settings tile: Hush on or off. */
 class HushTile : TileService() {
-    override fun onStartListening() = render()
+    override fun onStartListening() {
+        Listener.wake(this)
+        render()
+    }
 
     @SuppressLint("StartActivityAndCollapseDeprecated")
     override fun onClick() {

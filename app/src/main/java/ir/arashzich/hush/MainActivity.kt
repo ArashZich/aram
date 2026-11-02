@@ -83,6 +83,7 @@ class MainActivity : Activity() {
 
     override fun onResume() {
         super.onResume()
+        Listener.wake(this)
         Inbox.watch(refresh)
         if (tab == SETTINGS) settings.resume()
         refresh()
