@@ -7,6 +7,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.database.ContentObserver
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
@@ -36,6 +37,7 @@ class Listener : NotificationListenerService() {
         live = this
         activeNotifications?.forEach { seen += it.key; store.remember(it.packageName) }
         Gate.sync(this, store)
+        contentResolver.registerContentObserver(Gate.headsUpUri, false, headsUp)
         dropOldChannels()
         Inbox.prune(this)
         sweepNow()
@@ -47,12 +49,19 @@ class Listener : NotificationListenerService() {
         nm.notificationChannels.filter { it.id.startsWith("tone_") }.forEach { nm.deleteNotificationChannel(it.id) }
     }
 
+    // Android's floating comes back on now and then (the system or another app turns it on); Hush turns it off again.
+    private val headsUp = object : ContentObserver(Handler(Looper.getMainLooper())) {
+        override fun onChange(self: Boolean) = Gate.sync(this@Listener, store)
+    }
+
     override fun onListenerDisconnected() {
+        runCatching { contentResolver.unregisterContentObserver(headsUp) }
         if (live === this) live = null
         wake(this)
     }
 
     override fun onDestroy() {
+        runCatching { contentResolver.unregisterContentObserver(headsUp) }
         if (live === this) live = null
         super.onDestroy()
     }
@@ -64,6 +73,9 @@ class Listener : NotificationListenerService() {
         if (reason != REASON_LISTENER_CANCEL) seen -= sbn.key
         Popup.hide(sbn.key)
     }
+
+    private fun takeLater(key: String) =
+        Handler(Looper.getMainLooper()).postDelayed({ live?.cancelNotification(key) }, SOUND_MS)
 
     /** What was already in the shade when Hush was switched on, or before the listener connected. */
     private fun sweepNow() {
@@ -108,7 +120,8 @@ class Listener : NotificationListenerService() {
         var entry: Entry? = null
         if (Rules.collect(incoming, level)) {
             if (!summary) entry = save(sbn, title, level)
-            cancelNotification(sbn.key)
+            if (posted && Rules.letsSound(incoming, level, quiet, store.digestOn)) takeLater(sbn.key)
+            else cancelNotification(sbn.key)
             if (posted) Inbox.changed(this)
         } else if (action == Action.REMOVE) {
             cancelNotification(sbn.key)
@@ -194,5 +207,6 @@ class Listener : NotificationListenerService() {
         }
 
         private const val SETTLE = 10_000L
+        private const val SOUND_MS = 4_000L  // long enough for a notification sound
     }
 }

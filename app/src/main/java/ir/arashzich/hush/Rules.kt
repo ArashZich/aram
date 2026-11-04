@@ -72,6 +72,14 @@ object Rules {
     fun collect(n: Incoming, level: Level) = level != Level.SHADE && !n.ongoing && !n.urgent && !n.fullScreen
 
     /**
+     * Whether Hush leaves a collected notification in the shade for a moment, so the app's own sound plays to the
+     * end (taking it at once stops the sound). Not in quiet hours, at set summary times, for Silent apps or what the
+     * app itself would not sound.
+     */
+    fun letsSound(n: Incoming, level: Level, quiet: Boolean, digest: Boolean) =
+        collect(n, level) && level != Level.SILENT && !quiet && !digest && !n.dnd && !n.lowChannel && !n.repeat
+
+    /**
      * The text of a chat notification: only messages newer than [since] (what the user already cleared stays
      * cleared when the app reposts the whole conversation), with the sender's name in a group.
      */

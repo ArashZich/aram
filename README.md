@@ -66,8 +66,9 @@ since no ordinary app can change another app's floating. For *Important* apps an
 its own soft card over other apps instead.
 
 Good to know:
-- Each app keeps its own notification sound: Hush takes the notification out of the shade, but Android has already
-  played the app's sound, as set in Android's settings
+- Each app keeps its own notification sound, as set in Android's settings: Hush leaves a new notification in the shade
+  for 4 seconds so the sound plays to the end, then takes it (at once and silently in quiet hours, for Silent apps
+  and while the scheduled summary is on)
 - A notification's tap action lives only in memory (Android can't store it). After a restart, tapping an old item
   opens the app, not the exact chat. The same goes for *Reply*: after a restart the chip is gone until the next message
 - Turning Hush off — or *Settings → Turn off and uninstall* — puts the phone's own floating setting back

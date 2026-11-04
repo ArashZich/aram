@@ -9,11 +9,13 @@ import android.content.ComponentName
 import android.content.Context
 
 /**
- * Keeps the listener connected: when Hush's process starts and every 15 minutes, a dropped listener is connected
- * again. MIUI once kept the process alive for over an hour with the listener gone, and everything stayed in the shade.
+ * Keeps the listener connected and Android's floating off: when Hush's process starts and every 15 minutes, a
+ * dropped listener is connected again. MIUI once kept the process alive for over an hour with the listener gone,
+ * and everything stayed in the shade.
  */
 class Watch : JobService() {
     override fun onStartJob(p: JobParameters): Boolean {
+        Gate.sync(this, Store(this))
         Listener.wake(this) { jobFinished(p, false) }
         return true
     }

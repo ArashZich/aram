@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.NotificationManager
 import android.content.ComponentName
 import android.content.Context
+import android.net.Uri
 import android.content.pm.PackageManager
 import android.os.Build
 import android.provider.Settings
@@ -42,6 +43,8 @@ object Gate {
             "appops set $p SYSTEM_ALERT_WINDOW allow; appops set $p 10008 allow; " +
             "cmd notification allow_listener $p/$p.Listener\""
     }
+
+    val headsUpUri: Uri = Settings.Global.getUriFor(HEADS_UP)
 
     private fun headsUp(c: Context) = Settings.Global.getString(c.contentResolver, HEADS_UP)
 

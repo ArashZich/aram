@@ -154,6 +154,19 @@ class RulesTest {
         assertNull(Rules.nextDigest(at(8, 0), emptyList()))
     }
 
+    @Test fun leavesNewNotificationsForTheirSoundUnlessKeptQuiet() {
+        val n = Incoming("tg", "Sara", "hi")
+        assertTrue(Rules.letsSound(n, Level.NORMAL, quiet = false, digest = false))
+        assertTrue(Rules.letsSound(n, Level.IMPORTANT, quiet = false, digest = false))
+        assertFalse(Rules.letsSound(n, Level.SILENT, quiet = false, digest = false))
+        assertFalse(Rules.letsSound(n, Level.SHADE, quiet = false, digest = false))
+        assertFalse(Rules.letsSound(n, Level.NORMAL, quiet = true, digest = false))
+        assertFalse(Rules.letsSound(n, Level.NORMAL, quiet = false, digest = true))
+        assertFalse(Rules.letsSound(Incoming("tg", "Sara", "hi", repeat = true), Level.NORMAL, false, false))
+        assertFalse(Rules.letsSound(Incoming("tg", "Sara", "hi", dnd = true), Level.NORMAL, false, false))
+        assertFalse(Rules.letsSound(Incoming("tg", "Sara", "hi", lowChannel = true), Level.NORMAL, false, false))
+    }
+
     @Test fun nextDigestEveryFewMinutes() {
         val at = { h: Int, m: Int -> LocalDateTime.of(2026, 11, 1, h, m) }
         assertEquals(at(10, 15), Rules.nextDigest(at(10, 0), emptyList(), 15))
