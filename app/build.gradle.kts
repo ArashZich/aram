@@ -16,15 +16,15 @@ repositories {
 }
 
 android {
-    namespace = "ir.arashzich.hush"
+    namespace = "ir.arashzich.aram"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "ir.arashzich.hush"
+        applicationId = "ir.arashzich.aram"
         minSdk = 26
         targetSdk = 36
-        versionCode = 10
-        versionName = "2.4.0"
+        versionCode = 1
+        versionName = "1.0.0"
         resourceConfigurations += listOf("en", "fa")
     }
 

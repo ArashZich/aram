@@ -1,0 +1,26 @@
+# Draft for https://gitlab.com/fdroid/fdroiddata  ->  metadata/ir.arashzich.aram.yml
+Categories:
+  - System
+License: MIT
+AuthorName: Arash Zich
+WebSite: https://github.com/ArashZich/aram
+SourceCode: https://github.com/ArashZich/aram
+IssueTracker: https://github.com/ArashZich/aram/issues
+
+AutoName: Aram
+
+RepoType: git
+Repo: https://github.com/ArashZich/aram.git
+
+Builds:
+  - versionName: 1.0.0
+    versionCode: 1
+    commit: v1.0.0
+    subdir: app
+    gradle:
+      - yes
+
+AutoUpdateMode: Version
+UpdateCheckMode: Tags
+CurrentVersion: 1.0.0
+CurrentVersionCode: 1

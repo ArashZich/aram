@@ -1,11 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="18 18 72 72">
-  <rect x="18" y="18" width="72" height="72" rx="16" fill="#4A84C0"/>
-  <g transform="translate(54 54) scale(0.9) translate(-54 -54)">
-  <path fill="#A3C1E2" d="M43,30H65A5,5 0 0 1 65,40H43A5,5 0 0 1 43,30Z"/>
-  <path fill="#D3E2F2" d="M38,36H70A6,6 0 0 1 70,48H38A6,6 0 0 1 38,36Z"/>
-  <path fill="#FFFFFF" d="M35,43H73A10,10 0 0 1 83,53V69A10,10 0 0 1 73,79H35A10,10 0 0 1 25,69V53A10,10 0 0 1 35,43Z"/>
-  <circle cx="38" cy="61" r="6" fill="#4A84C0"/>
-  <path d="M50,57H72" stroke="#4A84C0" stroke-width="4" stroke-linecap="round"/>
-  <path d="M50,66H64" stroke="#4A84C0" stroke-opacity="0.45" stroke-width="4" stroke-linecap="round"/>
-</g>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 72 72">
+  <rect width="72" height="72" rx="16" fill="#4A84C0"/>
+  <path fill="#A3C1E2" fill-rule="evenodd" d="M27,11H45A5,5 0 0 1 50,16V20A5,5 0 0 1 45,25H27A5,5 0 0 1 22,20V16A5,5 0 0 1 27,11Z"/>
+  <path fill="#D3E2F2" fill-rule="evenodd" d="M23,18H49A6,6 0 0 1 55,24V27A6,6 0 0 1 49,33H23A6,6 0 0 1 17,27V24A6,6 0 0 1 23,18Z"/>
+  <path fill="#FFFFFF" fill-rule="evenodd" d="M20,26H52A9,9 0 0 1 61,35V51A9,9 0 0 1 52,60H20A9,9 0 0 1 11,51V35A9,9 0 0 1 20,26Z"/>
+  <path fill="#4A84C0" fill-rule="evenodd" d="M25,34.5C20,34.5 20.4,42.5 20,45C19.7,47.2 18.2,48 17.6,49H32.4C31.8,48 30.3,47.2 30,45C29.6,42.5 30,34.5 25,34.5ZM24,33.4A1,1 0 1 0 26,33.4A1,1 0 1 0 24,33.4ZM23.5,51A1.5,1.5 0 1 0 26.5,51A1.5,1.5 0 1 0 23.5,51Z"/>
+  <path fill="#4A84C0" fill-rule="evenodd" d="M37,36.2H53A1.8,1.8 0 0 1 54.8,38V38A1.8,1.8 0 0 1 53,39.8H37A1.8,1.8 0 0 1 35.2,38V38A1.8,1.8 0 0 1 37,36.2Z"/>
+  <path fill="#4A84C0" fill-rule="evenodd" d="M37,46.2H48A1.8,1.8 0 0 1 49.8,48V48A1.8,1.8 0 0 1 48,49.8H37A1.8,1.8 0 0 1 35.2,48V48A1.8,1.8 0 0 1 37,46.2Z"/>
+  <path fill="#4A84C0" fill-rule="evenodd" d="M50.2,28A7.8,7.8 0 1 0 65.8,28A7.8,7.8 0 1 0 50.2,28Z"/>
+  <path fill="#FF5A4F" fill-rule="evenodd" d="M52,28A6,6 0 1 0 64,28A6,6 0 1 0 52,28Z"/>
 </svg>

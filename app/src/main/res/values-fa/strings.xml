@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">هیس</string>
-    <string name="via_hush">هیس · %1$s</string>
+    <string name="app_name">آرام</string>
+    <string name="via_aram">آرام · %1$s</string>
 
     <string name="setup_title">راه‌اندازی یک‌باره</string>
-    <string name="setup_body">گوشی را با USB debugging روشن به کامپیوتر وصل کنید و این خط را یک بار اجرا کنید. با آن هیس می‌تواند نوتیف شناور اندروید را خاموش کند، نوتیف‌ها را ببیند و برای موارد مهم کارت آرام خودش را نشان دهد.</string>
+    <string name="setup_body">گوشی را با USB debugging روشن به کامپیوتر وصل کنید و این خط را یک بار اجرا کنید. با آن آرام می‌تواند نوتیف شناور اندروید را خاموش کند، نوتیف‌ها را ببیند و برای موارد مهم کارت آرام خودش را نشان دهد.</string>
     <string name="copy">کپی</string>
     <string name="copied">کپی شد</string>
     <string name="setup_or">دو مورد آخر را از اینجا هم می‌شود اجازه داد:</string>
@@ -11,7 +11,7 @@
     <string name="step_overlay">نمایش روی برنامه‌های دیگر</string>
     <string name="step_secure">خاموش‌کردن شناور صفحه‌ی تنظیماتی ندارد و فقط با خط adb بالا ممکن است.</string>
     <string name="step_done">✓ %1$s</string>
-    <string name="hint_on">اعلان‌ها در هیس جمع می‌شوند؛ فقط موارد مهم شناور می‌شوند</string>
+    <string name="hint_on">اعلان‌ها در آرام جمع می‌شوند؛ فقط موارد مهم شناور می‌شوند</string>
     <string name="hint_off">اندروید مثل همیشه اعلان‌ها را نشان می‌دهد</string>
     <string name="need_setup">اول راه‌اندازی را در تنظیمات کامل کنید</string>
 
@@ -24,7 +24,7 @@
     <string name="remove">حذف</string>
 
     <string name="apps_title">برنامه‌ها</string>
-    <string name="apps_hint">مهم شناور می‌شود و به صندوق هم می‌رود. صندوق بی‌صدا جمع می‌کند. بی‌صدا خوانده‌شده به صندوق می‌رود. نوار اعلان یعنی هیس کاری ندارد. برای تغییر روی برنامه بزنید.</string>
+    <string name="apps_hint">مهم شناور می‌شود و به صندوق هم می‌رود. صندوق بی‌صدا جمع می‌کند. بی‌صدا خوانده‌شده به صندوق می‌رود. نوار اعلان یعنی آرام کاری ندارد. برای تغییر روی برنامه بزنید.</string>
     <plurals name="today">
         <item quantity="one">امروز %1$d</item>
         <item quantity="other">امروز %1$d</item>
@@ -54,10 +54,10 @@
     <string name="test_body">برای بستن به بالا بکشید، برای باز کردن بزنید.</string>
 
     <string name="lv_shade">نوار اعلان</string>
-    <string name="lvh_important">با کارت هیس شناور می‌شود و در صندوق هم می‌ماند.</string>
+    <string name="lvh_important">با کارت آرام شناور می‌شود و در صندوق هم می‌ماند.</string>
     <string name="lvh_normal">بی‌صدا به صندوق و خلاصه می‌رود.</string>
     <string name="lvh_silent">خوانده‌شده به صندوق می‌رود و در خلاصه شمرده نمی‌شود.</string>
-    <string name="lvh_shade">هیس کاری ندارد؛ مثل همیشه در نوار اعلان می‌ماند.</string>
+    <string name="lvh_shade">آرام کاری ندارد؛ مثل همیشه در نوار اعلان می‌ماند.</string>
 
     <string name="tab_inbox">صندوق</string>
     <string name="tab_history">تاریخچه</string>
@@ -80,7 +80,7 @@
     <string name="read_all">همه خوانده شد</string>
     <string name="clear_all">پاک کردن همه</string>
     <string name="clear_all_ask">همه‌ی اعلان‌های صندوق پاک شوند؟ در تاریخچه می‌مانند.</string>
-    <string name="hush_off">هیس خاموش است</string>
+    <string name="aram_off">آرام خاموش است</string>
     <string name="turn_on">روشن کن</string>
     <string name="nothing_here">اینجا خالی است</string>
     <string name="back">برگشت</string>
@@ -93,7 +93,7 @@
     <string name="later_morning">فردا صبح، ساعت ۹</string>
     <string name="remind_set">یادت می‌ندازم: %1$s</string>
     <string name="channel_remind">یادآوری‌ها</string>
-    <string name="version">هیس %1$s</string>
+    <string name="version">آرام %1$s</string>
     <string name="tab_stats">آمار</string>
     <string name="month_prev">ماه قبل</string>
     <string name="month_next">ماه بعد</string>
@@ -112,23 +112,24 @@
     <string name="history_empty">هنوز اعلانی نگه داشته نشده.</string>
     <string name="no_match">چیزی پیدا نشد.</string>
     <string name="channel">خلاصه‌ی صندوق</string>
+    <string name="summary_all">همه در آرام</string>
     <plurals name="summary_title">
         <item quantity="one">%1$d اعلان تازه</item>
         <item quantity="other">%1$d اعلان تازه</item>
     </plurals>
-    <string name="step_post">نمایش اعلان خلاصه‌ی هیس</string>
-    <string name="step_usage">پاک شدن اعلان‌های هر برنامه وقتی بازش می‌کنی (دسترسی استفاده)</string>
+    <string name="step_post">نمایش اعلان خلاصه‌ی آرام</string>
+    <string name="step_usage">خوانده‌شدن اعلان‌های هر برنامه وقتی بازش می‌کنی (دسترسی استفاده)</string>
     <string name="keep_history">نگه‌داشتن تاریخچه</string>
     <string name="days">%1$d روز</string>
 
-    <string name="remove_title">حذف هیس</string>
-    <string name="remove_hint">هیس فقط یک چیز را در گوشی عوض می‌کند: کلید اعلان شناور اندروید. این دکمه آن را به حالت قبل برمی‌گرداند و بعد صفحه‌ی حذف اندروید را باز می‌کند. اگر از صفحه‌ی اصلی گوشی حذف کنید، اعلان شناور خاموش می‌ماند.</string>
+    <string name="remove_title">حذف آرام</string>
+    <string name="remove_hint">آرام فقط یک چیز را در گوشی عوض می‌کند: کلید اعلان شناور اندروید. این دکمه آن را به حالت قبل برمی‌گرداند و بعد صفحه‌ی حذف اندروید را باز می‌کند. اگر از صفحه‌ی اصلی گوشی حذف کنید، اعلان شناور خاموش می‌ماند.</string>
     <string name="remove_button">خاموش کن و حذف کن</string>
     <string name="set_status">وضعیت و راه‌اندازی</string>
     <string name="set_history">صندوق و تاریخچه</string>
     <string name="st_ready">همه چیز آماده است</string>
     <string name="st_needs">راه‌اندازی لازم است</string>
-    <string name="setup_why">هیس برای جمع کردن اعلان‌ها به این اجازه‌ها نیاز دارد.</string>
+    <string name="setup_why">آرام برای جمع کردن اعلان‌ها به این اجازه‌ها نیاز دارد.</string>
     <string name="apps_sum">برنامه‌های تعیین‌نشده: %1$s</string>
     <plurals name="words_count">
         <item quantity="one">%1$d اسم یا کلمه</item>
@@ -144,7 +145,7 @@
     <string name="reply_sent">فرستاده شد</string>
     <string name="reply_failed">فرستاده نشد. برای جواب، خود برنامه را باز کنید.</string>
     <string name="digest">خلاصه‌ی زمان‌بندی‌شده</string>
-    <string name="digest_hint">خلاصه‌ی بالای گوشی فقط در زمان‌های زیر عوض می‌شود. صندوق خود هیس همیشه به‌روز است و برنامه‌های مهم، آدم‌ها و کلمه‌ها و تماس‌ها مثل قبل فوری شناور می‌شوند.</string>
+    <string name="digest_hint">خلاصه‌ی بالای گوشی فقط در زمان‌های زیر عوض می‌شود. صندوق خود آرام همیشه به‌روز است و برنامه‌های مهم، آدم‌ها و کلمه‌ها و تماس‌ها مثل قبل فوری شناور می‌شوند.</string>
     <string name="digest_at">ساعت‌های مشخص</string>
     <string name="digest_every">%1$d دقیقه</string>
     <string name="digest_hourly">۱ ساعت</string>
@@ -152,4 +153,24 @@
     <string name="digest_sum_every">خلاصه هر %1$d دقیقه</string>
     <string name="digest_late">اندروید برای صرفه‌جویی در باتری ممکن است چند دقیقه دیرتر اجرایش کند.</string>
     <string name="digest_how">هر چند وقت</string>
+    <string name="set_language">زبان</string>
+    <string name="language_pick">زبان آرام</string>
+    <string name="lang_phone">مثل گوشی</string>
+    <string name="day_today">امروز</string>
+    <string name="day_yesterday">دیروز</string>
+    <string name="history_all">همه</string>
+    <string name="stats_all_apps">نمایش همه‌ی %1$s برنامه</string>
+    <string name="stats_all_items">همه‌ی اعلان‌های این برنامه</string>
+    <string name="backup_title">پشتیبان</string>
+    <string name="backup_hint">تنظیمات، برنامه‌ها، کلمه‌ها، صندوق، تاریخچه و آمار در یک فایل. متن پیام‌ها در این فایل رمزنگاری نشده است، پس جای امنی نگهش دار. مجوزها و عکس‌ها در آن نیستند.</string>
+    <string name="backup_export">خروجی</string>
+    <string name="backup_import">ورودی</string>
+    <string name="export_done">پشتیبان ذخیره شد.</string>
+    <string name="export_failed">پشتیبان ذخیره نشد.</string>
+    <string name="import_bad">این فایل پشتیبان آرام نیست.</string>
+    <string name="import_title">داده‌های آرام جایگزین شود؟</string>
+    <string name="import_ask">همه‌ی چیزهایی که الان در آرام است با این پشتیبان (%1$s اعلان) جایگزین می‌شود. این کار برگشت‌پذیر نیست.</string>
+    <string name="import_replace">جایگزین کن</string>
+    <string name="import_done">پشتیبان برگردانده شد.</string>
+    <string name="import_failed">پشتیبان برگردانده نشد. چیزی تغییر نکرد.</string>
 </resources>

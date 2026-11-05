@@ -13,6 +13,7 @@
     <color name="icon_ink">#FFFFFFFF</color>
     <color name="icon_mid">#FFD3E2F2</color>
     <color name="icon_back">#FFA3C1E2</color>
+    <color name="icon_badge">#FFFF5A4F</color>
     <!-- letter avatars: soft, close in tone -->
     <color name="av1">#FF5B8FC7</color>
     <color name="av2">#FF5FA39A</color>

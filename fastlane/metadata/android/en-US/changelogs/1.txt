@@ -1,1 +1,1 @@
-First release: per-app levels, people and words, quiet hours, calm floating card, Quick Settings tile.
+Hush is now Aram, with a new icon; a backup from Hush opens here. Choose the app's language in Settings, with full right-to-left and Persian dates. History is grouped by day and app, and Stats shows a day's apps. Back up and restore everything from Settings. Opening an app marks its items read instead of clearing them, and the summary lists the latest apps.

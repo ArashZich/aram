@@ -3,30 +3,15 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <group android:pivotX="54" android:pivotY="54" android:scaleX="0.84" android:scaleY="0.84">
-    <!-- many notifications folded into one quiet card -->
-    <path
-        android:fillColor="@color/icon_back"
-        android:pathData="M43,30H65A5,5 0 0 1 65,40H43A5,5 0 0 1 43,30Z" />
-    <path
-        android:fillColor="@color/icon_mid"
-        android:pathData="M38,36H70A6,6 0 0 1 70,48H38A6,6 0 0 1 38,36Z" />
-    <path
-        android:fillColor="@color/icon_ink"
-        android:pathData="M35,43H73A10,10 0 0 1 83,53V69A10,10 0 0 1 73,79H35A10,10 0 0 1 25,69V53A10,10 0 0 1 35,43Z" />
-    <path
-        android:fillColor="@color/icon_bg"
-        android:pathData="M38,55A6,6 0 1 1 38,67A6,6 0 1 1 38,55Z" />
-    <path
-        android:pathData="M50,57H72"
-        android:strokeColor="@color/icon_bg"
-        android:strokeLineCap="round"
-        android:strokeWidth="4" />
-    <path
-        android:pathData="M50,66H64"
-        android:strokeAlpha="0.45"
-        android:strokeColor="@color/icon_bg"
-        android:strokeLineCap="round"
-        android:strokeWidth="4" />
+    <group android:pivotX="54" android:pivotY="54" android:scaleX="0.92" android:scaleY="0.92">
+    <!-- notifications stacked in one place; the front card carries the bell and the badge -->
+    <path android:fillColor="@color/icon_back" android:pathData="M45,29H63A5,5 0 0 1 68,34V38A5,5 0 0 1 63,43H45A5,5 0 0 1 40,38V34A5,5 0 0 1 45,29Z" />
+    <path android:fillColor="@color/icon_mid" android:pathData="M41,36H67A6,6 0 0 1 73,42V45A6,6 0 0 1 67,51H41A6,6 0 0 1 35,45V42A6,6 0 0 1 41,36Z" />
+    <path android:fillColor="@color/icon_ink" android:pathData="M38,44H70A9,9 0 0 1 79,53V69A9,9 0 0 1 70,78H38A9,9 0 0 1 29,69V53A9,9 0 0 1 38,44Z" />
+    <path android:fillColor="@color/icon_bg" android:pathData="M43,52.5C38,52.5 38.4,60.5 38,63C37.7,65.2 36.2,66 35.6,67H50.4C49.8,66 48.3,65.2 48,63C47.6,60.5 48,52.5 43,52.5ZM42,51.4A1,1 0 1 0 44,51.4A1,1 0 1 0 42,51.4ZM41.5,69A1.5,1.5 0 1 0 44.5,69A1.5,1.5 0 1 0 41.5,69Z" />
+    <path android:fillColor="@color/icon_bg" android:pathData="M55,54.2H71A1.8,1.8 0 0 1 72.8,56V56A1.8,1.8 0 0 1 71,57.8H55A1.8,1.8 0 0 1 53.2,56V56A1.8,1.8 0 0 1 55,54.2Z" />
+    <path android:fillColor="@color/icon_bg" android:pathData="M55,64.2H66A1.8,1.8 0 0 1 67.8,66V66A1.8,1.8 0 0 1 66,67.8H55A1.8,1.8 0 0 1 53.2,66V66A1.8,1.8 0 0 1 55,64.2Z" />
+    <path android:fillColor="@color/icon_bg" android:pathData="M68.2,46A7.8,7.8 0 1 0 83.8,46A7.8,7.8 0 1 0 68.2,46Z" />
+    <path android:fillColor="@color/icon_badge" android:pathData="M70,46A6,6 0 1 0 82,46A6,6 0 1 0 70,46Z" />
     </group>
 </vector>

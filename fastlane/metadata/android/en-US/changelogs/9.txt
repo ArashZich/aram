@@ -1,1 +1,0 @@
-Notifications have their app's sound again: Hush leaves a new one in the shade for 4 seconds so the sound plays to the end. Android's own floating stays off: when the system turns it back on, Hush turns it off at once.

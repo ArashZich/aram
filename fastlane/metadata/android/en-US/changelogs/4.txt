@@ -1,1 +1,0 @@
-Hush's tones now always play: Hush plays them itself (Android quieted them), and a tone can no longer play the wrong sound.

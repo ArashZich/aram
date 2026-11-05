@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">Hush</string>
-    <string name="via_hush">Hush · %1$s</string>
+    <string name="app_name">Aram</string>
+    <string name="via_aram">Aram · %1$s</string>
 
     <string name="setup_title">One-time setup</string>
-    <string name="setup_body">Connect the phone with USB debugging on and run this once. It lets Hush switch Android\'s floating notifications off, read incoming notifications and show its own calm card for the ones you marked.</string>
+    <string name="setup_body">Connect the phone with USB debugging on and run this once. It lets Aram switch Android\'s floating notifications off, read incoming notifications and show its own calm card for the ones you marked.</string>
     <string name="copy">Copy</string>
     <string name="copied">Copied</string>
     <string name="setup_or">The last two can also be allowed here:</string>
@@ -11,7 +11,7 @@
     <string name="step_overlay">Display over other apps</string>
     <string name="step_secure">Switching floating off has no screen of its own: it needs the adb line above.</string>
     <string name="step_done">✓ %1$s</string>
-    <string name="hint_on">Notifications gather in Hush; only what you marked floats</string>
+    <string name="hint_on">Notifications gather in Aram; only what you marked floats</string>
     <string name="hint_off">Android shows notifications as usual</string>
     <string name="need_setup">Finish the setup in Settings first</string>
 
@@ -54,10 +54,10 @@
     <string name="test_body">Swipe up to dismiss, or tap to open.</string>
 
     <string name="lv_shade">Shade</string>
-    <string name="lvh_important">Floats with Hush\'s card and is kept in the inbox.</string>
+    <string name="lvh_important">Floats with Aram\'s card and is kept in the inbox.</string>
     <string name="lvh_normal">Goes quietly into the inbox and the summary.</string>
     <string name="lvh_silent">Goes into the inbox already read; it is not counted in the summary.</string>
-    <string name="lvh_shade">Hush leaves it in the shade, as Android shows it.</string>
+    <string name="lvh_shade">Aram leaves it in the shade, as Android shows it.</string>
 
     <string name="tab_inbox">Inbox</string>
     <string name="tab_history">History</string>
@@ -80,7 +80,7 @@
     <string name="read_all">Mark all read</string>
     <string name="clear_all">Clear all</string>
     <string name="clear_all_ask">Clear every notification from the inbox? They stay in History.</string>
-    <string name="hush_off">Hush is off</string>
+    <string name="aram_off">Aram is off</string>
     <string name="turn_on">Turn on</string>
     <string name="nothing_here">Nothing here</string>
     <string name="back">Back</string>
@@ -93,7 +93,7 @@
     <string name="later_morning">Tomorrow morning, 9:00</string>
     <string name="remind_set">I\'ll remind you %1$s</string>
     <string name="channel_remind">Reminders</string>
-    <string name="version">Hush %1$s</string>
+    <string name="version">Aram %1$s</string>
     <string name="tab_stats">Stats</string>
     <string name="month_prev">Previous month</string>
     <string name="month_next">Next month</string>
@@ -112,23 +112,24 @@
     <string name="history_empty">No notifications kept yet.</string>
     <string name="no_match">Nothing matches.</string>
     <string name="channel">Inbox summary</string>
+    <string name="summary_all">All in Aram</string>
     <plurals name="summary_title">
         <item quantity="one">%1$d new notification</item>
         <item quantity="other">%1$d new notifications</item>
     </plurals>
-    <string name="step_post">Show Hush\'s summary notification</string>
-    <string name="step_usage">Clear an app\'s items when you open it (usage access)</string>
+    <string name="step_post">Show Aram\'s summary notification</string>
+    <string name="step_usage">Mark an app\'s items read when you open it (usage access)</string>
     <string name="keep_history">Keep history for</string>
     <string name="days">%1$d days</string>
 
-    <string name="remove_title">Remove Hush</string>
-    <string name="remove_hint">Hush changes one thing on the phone: Android\'s floating notifications switch. This button switches it back as it was, then opens Android\'s uninstall screen. Uninstalling from the launcher would leave floating off.</string>
+    <string name="remove_title">Remove Aram</string>
+    <string name="remove_hint">Aram changes one thing on the phone: Android\'s floating notifications switch. This button switches it back as it was, then opens Android\'s uninstall screen. Uninstalling from the launcher would leave floating off.</string>
     <string name="remove_button">Turn off and uninstall</string>
     <string name="set_status">Status and setup</string>
     <string name="set_history">Inbox and history</string>
     <string name="st_ready">Everything is set up</string>
     <string name="st_needs">Setup needed</string>
-    <string name="setup_why">Hush needs the permissions below before it can gather notifications.</string>
+    <string name="setup_why">Aram needs the permissions below before it can gather notifications.</string>
     <string name="apps_sum">Apps you have not set: %1$s</string>
     <plurals name="words_count">
         <item quantity="one">%1$d name or word</item>
@@ -152,4 +153,26 @@
     <string name="digest_sum_every">summary every %1$d min</string>
     <string name="digest_late">Android may run it a few minutes late to save battery.</string>
     <string name="digest_how">How often</string>
+    <string name="set_language">Language</string>
+    <string name="language_pick">Language of Aram</string>
+    <string name="lang_phone">Same as the phone</string>
+    <string name="lang_fa" translatable="false">فارسی</string>
+    <string name="lang_en" translatable="false">English</string>
+    <string name="day_today">Today</string>
+    <string name="day_yesterday">Yesterday</string>
+    <string name="history_all">All</string>
+    <string name="stats_all_apps">Show all %1$s apps</string>
+    <string name="stats_all_items">All from this app</string>
+    <string name="backup_title">Backup</string>
+    <string name="backup_hint">Settings, apps, words, inbox, history and stats in one file. Message text in it is not encrypted, so keep it somewhere safe. Permissions and pictures are not included.</string>
+    <string name="backup_export">Export</string>
+    <string name="backup_import">Import</string>
+    <string name="export_done">Backup saved.</string>
+    <string name="export_failed">The backup could not be saved.</string>
+    <string name="import_bad">This file is not an Aram backup.</string>
+    <string name="import_title">Replace Aram\'s data?</string>
+    <string name="import_ask">Everything now in Aram is replaced by this backup (%1$s notifications). This cannot be undone.</string>
+    <string name="import_replace">Replace</string>
+    <string name="import_done">Backup restored.</string>
+    <string name="import_failed">The backup could not be restored. Nothing changed.</string>
 </resources>

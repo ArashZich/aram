@@ -6,7 +6,7 @@
         android:name="android.permission.WRITE_SECURE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <!-- Hush's one summary notification in the shade. -->
+    <!-- Aram's one summary notification in the shade. -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <!-- "Turn off and uninstall" opens Android's uninstall screen after restoring the phone's own settings. -->
     <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
@@ -14,9 +14,9 @@
     <!-- "Remind me later" alarms come back after a restart. -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
-    <!-- Keeps the phone awake for the few seconds a notification's sound plays, so Hush can take it on time. -->
+    <!-- Keeps the phone awake for the few seconds a notification's sound plays, so Aram can take it on time. -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <!-- Tells when the user opened an app directly, so its items can leave the inbox. -->
+    <!-- Tells when the user opened an app directly, so its items can count as read. -->
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
@@ -35,8 +35,9 @@
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:localeConfig="@xml/locales_config"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Hush">
+        android:theme="@style/Theme.Aram">
 
         <activity
             android:name=".MainActivity"
@@ -92,7 +93,7 @@
         </service>
 
         <service
-            android:name=".HushTile"
+            android:name=".AramTile"
             android:exported="true"
             android:icon="@drawable/ic_tile"
             android:label="@string/app_name"

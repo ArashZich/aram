@@ -1,1 +1,0 @@
-Opening an app directly now clears its items from Hush (they stay in the history); this needs usage access, offered in Status and setup. Notifications no longer stay in the shade while the phone sleeps, and a second message right after the first keeps its sound.
