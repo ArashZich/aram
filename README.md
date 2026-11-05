@@ -17,9 +17,8 @@
 ---
 
 Android shows notifications one by one: they float over what you are doing, pile up in the shade and buzz all day.
-Aram takes them out of the shade as they arrive, keeps them in its own inbox, sorted by app, and leaves a single
-silent line in the shade: *“12 notifications · Telegram 8 · Gmail 3 · +2”*. The few things that really matter still
-reach you right away.
+Aram takes them out of the shade as they arrive, keeps them in its own inbox, sorted by app, and leaves one silent
+summary in the shade that lists the latest apps. The few things that really matter still reach you right away.
 
 [فارسی ↓](#فارسی)
 
@@ -32,9 +31,10 @@ reach you right away.
 - **Copy code**: a verification code (OTP) gets its own chip — one tap copies it. Persian digits work too
 - **Remind me later**: hold a notification → in 1 hour, this evening or tomorrow morning; it comes back with a sound
 - **Reply**: messages that offer a reply in the shade (Telegram, WhatsApp, SMS…) get a *Reply* chip
-- **History**: everything of the last days, searchable, also what you cleared (7, 30 or 90 days)
-- **Stats**: a month calendar shaded by how busy each day was, that day's notifications, and the week's noisiest
+- **History**: everything of the last days by day and app, also what you cleared; search and app chips show flat results (7, 30 or 90 days)
+- **Stats**: a month calendar shaded by how busy each day was, the apps of the day you pick, and the week's noisiest
   apps with a one-tap *Make silent*
+- **Opening an app** marks its items read; they stay in the inbox until you clear them
 
 **Per app**, four levels:
 
@@ -51,7 +51,9 @@ reach you right away.
 - **No floods**: one app floats at most once a minute (or every 5 min, or every time)
 - **Scheduled summary** (off by default): the shade's summary changes only at your times (10:00, 14:00, 19:00) or
   every 15, 30 or 60 minutes, silently; the inbox in the app stays live
-- Quick Settings tile, English and Persian (RTL), light and dark, calm blue
+- **Language**: phone, فارسی or English in Settings, right-to-left in Persian, with Persian dates
+- **Backup**: export and import settings, inbox and history as one file in *Settings → Inbox and history*
+- Quick Settings tile, light and dark, calm blue
 - No internet permission, no Google services, no libraries — nothing leaves the phone
 
 **Never touched**: calls, alarms, music, navigation and other ongoing notifications stay where Android puts them.
@@ -75,7 +77,7 @@ Good to know:
 
 ## Install
 
-1. Download `Aram-<version>.apk` from [Releases](../../releases) and install it.
+1. Download `Aram-<version>-universal.apk` from [Releases](../../releases) and install it.
 2. Give the one-time permissions over adb (Developer options → USB debugging; on Xiaomi/HyperOS also
    *USB debugging (Security settings)* and *Install via USB*):
 
@@ -89,6 +91,10 @@ Good to know:
 
 **Xiaomi / HyperOS**: an update may take back *Display over other apps* and *Autostart* a few seconds after
 installing. Aram shows the setup box again; run the line once more.
+
+**Coming from Hush**: Aram is the new name of [Hush](https://github.com/ArashZich/hush) and installs as a new app.
+In Hush, export from *Settings → Inbox and history* and turn it off. Then give Aram its permissions, import the file
+in the same place and turn Aram on. Pictures are not part of a backup. Remove Hush the normal way, while it is off.
 
 **Uninstalling**: use *Settings → Turn off and uninstall*. If Aram was removed another way:
 `adb shell settings put global heads_up_notifications_enabled 1`
@@ -124,6 +130,8 @@ keyPassword=...
 | `Reminder.kt` | “Remind me later” alarms, also after a restart |
 | `Popup.kt` | The floating card |
 | `Gate.kt` | The global heads-up switch and permission checks |
+| `Backup.kt` | Export and import; the file's kind stays `hush-backup` so a Hush backup still opens |
+| `Lang.kt` | The app's language setting |
 | `MainActivity.kt`, `AppActivity.kt`, `*Page.kt`, `Rows.kt` | The screens |
 
 ## فارسی
@@ -136,16 +144,22 @@ keyPassword=...
 - **کپی کد**: کد تأیید (رمز یکبار مصرف) یک دکمه‌ی جدا دارد، حتی با عددهای فارسی
 - **بعداً یادم بنداز**: یک ساعت دیگر، امشب یا فردا صبح
 - **جواب**: پیام‌هایی که در کشو دکمه‌ی جواب دارند (تلگرام، واتس‌اپ، پیامک…) داخل آرام هم «جواب» دارند
-- **تاریخچه**: همه‌چیز چند روز اخیر، با جست‌وجو
-- **آمار**: تقویم ماه با شلوغی هر روز، نوتیف‌های آن روز، و پرسروصداترین برنامه‌های هفته با «ساکتش کن»
+- **تاریخچه**: همه‌چیز چند روز اخیر بر اساس روز و برنامه، با جست‌وجو
+- **آمار**: تقویم ماه با شلوغی هر روز، برنامه‌های آن روز، و پرسروصداترین برنامه‌های هفته با «ساکتش کن»
 - **خلاصه‌ی زمان‌بندی‌شده** (پیش‌فرض خاموش): خلاصه‌ی کشو فقط در ساعت‌های دلخواه یا هر ۱۵، ۳۰ یا ۶۰ دقیقه عوض می‌شود، بی‌صدا
 - چهار سطح برای هر برنامه: **مهم** (شناور + صندوق)، **صندوق**، **ساکت** (خوانده‌شده)، **کشو** (دست نمی‌زند)
 - آدم‌ها و کلمه‌های مهم همیشه شناور می‌شوند؛ ساعت سکوت؛ جلوگیری از رگبار نوتیف
+- **زبان**: زبان گوشی، فارسی یا انگلیسی از تنظیمات، با راست‌چین کامل و تاریخ شمسی
+- **پشتیبان**: خروجی و ورودی تنظیمات، صندوق و تاریخچه در یک فایل، از *تنظیمات ← صندوق و تاریخچه*
+- باز کردن یک برنامه نوتیف‌هایش را خوانده می‌کند و تا وقتی پاکشان نکنید در صندوق می‌مانند
 - تماس، زنگ ساعت، موسیقی و مسیریابی دست‌نخورده می‌مانند
 - بدون دسترسی اینترنت، بدون سرویس گوگل، بدون کتابخانه؛ هیچ چیز از گوشی بیرون نمی‌رود
 
 نصب: APK را از [Releases](../../releases) بگیرید و یک بار دستور adb بالا را اجرا کنید (داخل برنامه با دکمه‌ی
 کپی هست). برای حذف، از *تنظیمات ← خاموش کن و حذف کن* استفاده کنید تا تنظیم گوشی برگردد.
+
+**آمدن از هیس**: آرام نام تازه‌ی هیس است و به‌صورت برنامه‌ی جدید نصب می‌شود. در هیس از *تنظیمات ← صندوق و تاریخچه* خروجی بگیرید
+و آن را خاموش کنید. بعد دسترسی‌های آرام را بدهید، فایل را از همان‌جا وارد کنید و آرام را روشن کنید. عکس‌ها در پشتیبان نیستند.
 
 ## License
 
