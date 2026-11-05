@@ -77,6 +77,9 @@ class SettingActivity : Activity() {
         findViewById<View>(R.id.step_overlay).setOnClickListener {
             startActivity(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName")))
         }
+        findViewById<View>(R.id.step_usage).setOnClickListener {
+            startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
+        }
         findViewById<View>(R.id.step_post).setOnClickListener {
             if (Build.VERSION.SDK_INT >= 33) requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 1)
         }
@@ -100,6 +103,7 @@ class SettingActivity : Activity() {
         step(R.id.step_overlay, R.string.step_overlay, Gate.canDraw(this))
         findViewById<View>(R.id.step_secure).visibility = if (Gate.canWrite(this)) View.GONE else View.VISIBLE
         findViewById<View>(R.id.step_post).visibility = if (Inbox.canPost(this)) View.GONE else View.VISIBLE
+        findViewById<View>(R.id.step_usage).visibility = if (Opened.allowed(this)) View.GONE else View.VISIBLE
     }
 
     private fun step(id: Int, label: Int, done: Boolean) = findViewById<TextView>(id).apply {

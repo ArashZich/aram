@@ -20,6 +20,13 @@
             android:layout_marginTop="12dp"
             android:text="@string/step_post"
             android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/step_usage"
+            style="@style/TextButton"
+            android:layout_marginTop="12dp"
+            android:text="@string/step_usage"
+            android:visibility="gone" />
     </LinearLayout>
 
     <LinearLayout

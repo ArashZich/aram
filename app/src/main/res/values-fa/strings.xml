@@ -117,6 +117,7 @@
         <item quantity="other">%1$d اعلان تازه</item>
     </plurals>
     <string name="step_post">نمایش اعلان خلاصه‌ی هیس</string>
+    <string name="step_usage">پاک شدن اعلان‌های هر برنامه وقتی بازش می‌کنی (دسترسی استفاده)</string>
     <string name="keep_history">نگه‌داشتن تاریخچه</string>
     <string name="days">%1$d روز</string>
 

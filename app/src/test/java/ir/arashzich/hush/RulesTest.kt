@@ -196,4 +196,18 @@ class RulesTest {
         val levels = mapOf("tg" to Level.SILENT, "bank" to Level.SHADE)
         assertEquals(setOf("ig"), Rules.noisy(apps, { levels[it] ?: Level.NORMAL }))
     }
+
+    @Test fun aRepostWaitsForItsOwnSoundButNotForever() {
+        assertEquals(4_000L, Rules.soundWait(0))
+        assertEquals(4_000L, Rules.soundWait(3_000))
+        assertEquals(1_000L, Rules.soundWait(11_000))
+        assertEquals(0L, Rules.soundWait(20_000))
+    }
+
+    @Test fun anAppOpenedByHushIsNotOpenedByTheUser() {
+        assertTrue(Rules.userOpened(1_000, null))
+        assertFalse(Rules.userOpened(5_000, 1_000))
+        assertTrue(Rules.userOpened(60_000, 1_000))
+        assertTrue(Rules.userOpened(500, 1_000))
+    }
 }

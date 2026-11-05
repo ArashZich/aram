@@ -117,6 +117,7 @@
         <item quantity="other">%1$d new notifications</item>
     </plurals>
     <string name="step_post">Show Hush\'s summary notification</string>
+    <string name="step_usage">Clear an app\'s items when you open it (usage access)</string>
     <string name="keep_history">Keep history for</string>
     <string name="days">%1$d days</string>
 

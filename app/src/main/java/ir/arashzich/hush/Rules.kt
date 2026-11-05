@@ -53,6 +53,9 @@ data class Entry(
 class Group(val pkg: String, val count: Int, val unread: Int, val latest: Entry)
 
 object Rules {
+    private const val SOUND_MS = 4_000L       // long enough for a notification sound
+    private const val HOLD_MS = 12_000L
+    private const val HUSH_OPEN_MS = 15_000L  // an app can take this long to come up
     /**
      * [sinceLast] is the time since this app last floated; [gap] the smallest allowed time between two.
      * A matching [Word] beats the app's level: a silenced group app still lets that one person through.
@@ -78,6 +81,15 @@ object Rules {
      */
     fun letsSound(n: Incoming, level: Level, quiet: Boolean, digest: Boolean) =
         collect(n, level) && level != Level.SILENT && !quiet && !digest && !n.dnd && !n.lowChannel && !n.repeat
+
+    /**
+     * How long a notification still waits for its sound, [held] ms after its first post. Each repost waits the full
+     * time, but a busy chat cannot keep a notification in the shade past [HOLD_MS].
+     */
+    fun soundWait(held: Long) = minOf(SOUND_MS, HOLD_MS - held).coerceAtLeast(0)
+
+    /** Whether an app came up because the user opened it, not because Hush opened it [byHush] (a time) just before. */
+    fun userOpened(resumed: Long, byHush: Long?) = byHush == null || resumed - byHush !in 0..HUSH_OPEN_MS
 
     /**
      * The text of a chat notification: only messages newer than [since] (what the user already cleared stays

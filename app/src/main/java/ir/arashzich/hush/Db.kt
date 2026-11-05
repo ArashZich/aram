@@ -125,6 +125,11 @@ class Db private constructor(c: Context) : SQLiteOpenHelper(c, "inbox.db", null,
 
     fun clearAll() = set("cleared", "cleared = 0", null)
 
+    /** The user opened [pkg] at [time]: what came before is seen. Returns how many rows that cleared. */
+    fun clearSeen(pkg: String, time: Long): Int =
+        writableDatabase.update("items", ContentValues().apply { put("cleared", 1); put("read", 1) },
+            "cleared = 0 AND pkg = ? AND time <= ?", arrayOf(pkg, time.toString()))
+
     /** Forgets rows older than [before]; returns their ids so their pictures can go too. */
     fun pruneDays(before: Long) = writableDatabase.delete("days", "day < ?", arrayOf(before.toString()))
 

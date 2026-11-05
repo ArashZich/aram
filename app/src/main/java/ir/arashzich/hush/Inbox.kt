@@ -82,6 +82,7 @@ object Inbox {
 
     /** Opens the notification as its app meant it, or the app when that tap action is gone (after a restart). */
     fun open(c: Context, e: Entry) {
+        Opened.byHush(e.pkg)
         val sent = actions[e.key]?.let {
             runCatching { it.send(c, 0, null, null, null, null, startOptions()) }.isSuccess
         }

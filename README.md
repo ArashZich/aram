@@ -80,7 +80,7 @@ Good to know:
    *USB debugging (Security settings)* and *Install via USB*):
 
    ```sh
-   adb shell "p=ir.arashzich.hush; pm grant \$p android.permission.WRITE_SECURE_SETTINGS; pm grant \$p android.permission.POST_NOTIFICATIONS; appops set \$p SYSTEM_ALERT_WINDOW allow; appops set \$p 10008 allow; cmd notification allow_listener \$p/\$p.Listener"
+   adb shell "p=ir.arashzich.hush; pm grant \$p android.permission.WRITE_SECURE_SETTINGS; pm grant \$p android.permission.POST_NOTIFICATIONS; appops set \$p SYSTEM_ALERT_WINDOW allow; appops set \$p GET_USAGE_STATS allow; appops set \$p 10008 allow; cmd notification allow_listener \$p/\$p.Listener"
    ```
 
    The same line is in the app's setup, with a Copy button. `10008` is Xiaomi's *Autostart*; without it HyperOS

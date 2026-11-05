@@ -40,7 +40,8 @@ object Gate {
         val p = c.packageName
         return "adb shell \"pm grant $p android.permission.WRITE_SECURE_SETTINGS; " +
             "pm grant $p android.permission.POST_NOTIFICATIONS; " +
-            "appops set $p SYSTEM_ALERT_WINDOW allow; appops set $p 10008 allow; " +
+            "appops set $p SYSTEM_ALERT_WINDOW allow; appops set $p GET_USAGE_STATS allow; " +
+            "appops set $p 10008 allow; " +
             "cmd notification allow_listener $p/$p.Listener\""
     }
 

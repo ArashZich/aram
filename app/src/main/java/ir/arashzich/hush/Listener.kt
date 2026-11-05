@@ -27,6 +27,14 @@ class Listener : NotificationListenerService() {
     private lateinit var store: Store
     private val seen = HashSet<String>()             // keys already counted, to tell a new notification from an update
     private val lastFloat = HashMap<String, Long>()  // package -> elapsed time of its last card
+    private val main = Handler(Looper.getMainLooper())
+    private val waiting = HashMap<String, Waiting>() // notifications left in the shade while their sound plays
+    private val awake by lazy {
+        getSystemService(PowerManager::class.java).newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "hush:sound")
+            .apply { setReferenceCounted(false) }
+    }
+
+    private class Waiting(val since: Long, val take: Runnable)
 
     override fun onCreate() {
         super.onCreate()
@@ -41,6 +49,19 @@ class Listener : NotificationListenerService() {
         dropOldChannels()
         Inbox.prune(this)
         sweepNow()
+        main.removeCallbacks(watchOpened)
+        main.post(watchOpened)
+    }
+
+    // An app the user opened themselves clears its items. This only runs while the phone is awake: the timer stands
+    // still in sleep and what happened meanwhile is read at the next look.
+    private val watchOpened = object : Runnable {
+        override fun run() {
+            if (store.on && getSystemService(PowerManager::class.java).isInteractive) {
+                Inbox.load({ Opened.clear(this@Listener) }) { if (it) Inbox.changed(this@Listener) }
+            }
+            main.postDelayed(this, LOOK_MS)
+        }
     }
 
     // Hush 2.0–2.1 had tones of its own, one notification channel each; those channels go.
@@ -55,12 +76,17 @@ class Listener : NotificationListenerService() {
     }
 
     override fun onListenerDisconnected() {
+        main.removeCallbacks(watchOpened)
         runCatching { contentResolver.unregisterContentObserver(headsUp) }
         if (live === this) live = null
         wake(this)
     }
 
     override fun onDestroy() {
+        main.removeCallbacks(watchOpened)
+        waiting.values.forEach { main.removeCallbacks(it.take) }
+        waiting.clear()
+        if (awake.isHeld) awake.release()
         runCatching { contentResolver.unregisterContentObserver(headsUp) }
         if (live === this) live = null
         super.onDestroy()
@@ -71,11 +97,30 @@ class Listener : NotificationListenerService() {
     // Hush's own cancel must not make the app's next repost look new; the app's own cancel does.
     override fun onNotificationRemoved(sbn: StatusBarNotification, rankings: RankingMap, reason: Int) {
         if (reason != REASON_LISTENER_CANCEL) seen -= sbn.key
+        waiting.remove(sbn.key)?.let { main.removeCallbacks(it.take) }
+        if (waiting.isEmpty() && awake.isHeld) awake.release()
         Popup.hide(sbn.key)
     }
 
-    private fun takeLater(key: String) =
-        Handler(Looper.getMainLooper()).postDelayed({ live?.cancelNotification(key) }, SOUND_MS)
+    /**
+     * Takes the notification once its sound has played. Each repost plays a sound of its own, so it starts the wait
+     * again. The phone stays awake for the wait: in sleep the timer stands still, and the notification stayed in the
+     * shade until the screen came on.
+     */
+    private fun takeLater(key: String) {
+        val now = SystemClock.elapsedRealtime()
+        val since = waiting[key]?.since ?: now
+        waiting[key]?.let { main.removeCallbacks(it.take) }
+        val take = Runnable {
+            waiting.remove(key)
+            live?.cancelNotification(key)
+            if (waiting.isEmpty() && awake.isHeld) awake.release()
+        }
+        waiting[key] = Waiting(since, take)
+        val wait = Rules.soundWait(now - since)
+        awake.acquire(wait + AWAKE_EXTRA)
+        main.postDelayed(take, wait)
+    }
 
     /** What was already in the shade when Hush was switched on, or before the listener connected. */
     private fun sweepNow() {
@@ -207,6 +252,7 @@ class Listener : NotificationListenerService() {
         }
 
         private const val SETTLE = 10_000L
-        private const val SOUND_MS = 4_000L  // long enough for a notification sound
+        private const val AWAKE_EXTRA = 1_000L
+        private const val LOOK_MS = 3_000L  // how often the opened apps are read while the screen is on
     }
 }
