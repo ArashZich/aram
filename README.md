@@ -92,6 +92,9 @@ Good to know:
 **Xiaomi / HyperOS**: an update may take back *Display over other apps* and *Autostart* a few seconds after
 installing. Aram shows the setup box again; run the line once more.
 
+The freezer of Xiaomi phones can stop background apps for minutes. So Aram's summary is a foreground service and stays in
+the shade while Aram is on, as *Aram is on* when nothing is unread. Also set *Battery saver* to *No restrictions* for Aram.
+
 **Coming from Hush**: Aram is the new name of [Hush](https://github.com/ArashZich/hush) and installs as a new app.
 In Hush, export from *Settings → Inbox and history* and turn it off. Then give Aram its permissions, import the file
 in the same place and turn Aram on. Pictures are not part of a backup. Remove Hush the normal way, while it is off.

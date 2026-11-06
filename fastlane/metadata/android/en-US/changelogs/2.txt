@@ -1,0 +1,1 @@
+Aram's summary now stays in the shade while Aram is on. It runs as a foreground service, so Xiaomi phones should stop freezing Aram and leaving notifications in the shade.

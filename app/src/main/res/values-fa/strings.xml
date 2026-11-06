@@ -113,6 +113,7 @@
     <string name="no_match">چیزی پیدا نشد.</string>
     <string name="channel">خلاصه‌ی صندوق</string>
     <string name="summary_all">همه در آرام</string>
+    <string name="summary_idle">آرام روشن است</string>
     <plurals name="summary_title">
         <item quantity="one">%1$d اعلان تازه</item>
         <item quantity="other">%1$d اعلان تازه</item>

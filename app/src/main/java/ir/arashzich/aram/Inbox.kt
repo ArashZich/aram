@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.ActivityOptions
 import android.app.Notification
 import android.app.NotificationChannel
+import android.util.Log
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.RemoteInput
@@ -30,7 +31,7 @@ import java.util.concurrent.Executors
  */
 object Inbox {
     private const val CHANNEL = "inbox"
-    private const val SUMMARY = 1
+    const val SUMMARY = 1
     private const val DAY = 24 * 60 * 60 * 1000L
 
     private val main = Handler(Looper.getMainLooper())
@@ -117,21 +118,20 @@ object Inbox {
         val store = Store(c)
         // At set hours the shade shows only what arrived until the last of those times; the app's inbox stays live.
         val unread = Db.get(c).open().filter { !it.read && (!store.digestOn || it.time <= store.digestUntil) }
-        if (!store.on || unread.isEmpty() || !canPost(c)) {
+        if (!store.on || !canPost(c)) {
+            Keep.stop(c)
             nm.cancel(SUMMARY)
             return
         }
-        if (nm.getNotificationChannel(CHANNEL) == null) {
-            nm.createNotificationChannel(
-                NotificationChannel(CHANNEL, c.getString(R.string.channel), NotificationManager.IMPORTANCE_LOW)
-                    .apply { setShowBadge(false) }
-            )
+        if (unread.isEmpty()) {
+            nm.notify(SUMMARY, idle(c))
+            keep(c)
+            return
         }
+        channel(c)
         val groups = Rules.groups(unread)
         val title = c.resources.getQuantityString(R.plurals.summary_title, unread.size, unread.size)
-        val tap = PendingIntent.getActivity(c, 0,
-            Intent(c, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP),
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+        val tap = openApp(c)
         val n = Notification.Builder(c, CHANNEL)
             .setSmallIcon(R.drawable.ic_tile)
             .setColor(c.getColor(R.color.accent))
@@ -143,9 +143,43 @@ object Inbox {
             .setCustomBigContentView(appRows(c, groups, tap))
             .setContentIntent(tap)
             .setOnlyAlertOnce(true)
+            .setOngoing(true)
             .setNumber(unread.size)
             .build()
         nm.notify(SUMMARY, n)
+        keep(c)
+    }
+
+    /** The summary while nothing is unread: it stays, because it is what keeps Aram from being frozen. */
+    fun idle(c: Context): Notification {
+        channel(c)
+        return Notification.Builder(c, CHANNEL)
+            .setSmallIcon(R.drawable.ic_tile)
+            .setColor(c.getColor(R.color.accent))
+            .setContentTitle(c.getString(R.string.summary_idle))
+            .setContentIntent(openApp(c))
+            .setOnlyAlertOnce(true)
+            .setOngoing(true)
+            .build()
+    }
+
+    private fun channel(c: Context) {
+        val nm = c.getSystemService(NotificationManager::class.java)
+        if (nm.getNotificationChannel(CHANNEL) == null) {
+            nm.createNotificationChannel(
+                NotificationChannel(CHANNEL, c.getString(R.string.channel), NotificationManager.IMPORTANCE_LOW)
+                    .apply { setShowBadge(false) }
+            )
+        }
+    }
+
+    private fun openApp(c: Context) = PendingIntent.getActivity(c, 0,
+        Intent(c, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP),
+        PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+
+    // The summary is already posted, so a refused start only loses the protection; the log says so.
+    private fun keep(c: Context) {
+        runCatching { Keep.start(c) }.onFailure { Log.w("Aram", "foreground service refused", it) }
     }
 
     // The expanded summary, kept short: the latest apps, each opening itself (or Aram, for an app with no screen).

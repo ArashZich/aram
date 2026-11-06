@@ -113,6 +113,7 @@
     <string name="no_match">Nothing matches.</string>
     <string name="channel">Inbox summary</string>
     <string name="summary_all">All in Aram</string>
+    <string name="summary_idle">Aram is on</string>
     <plurals name="summary_title">
         <item quantity="one">%1$d new notification</item>
         <item quantity="other">%1$d new notifications</item>
